@@ -9,7 +9,7 @@
 AppSettings::AppSettings(QObject *parent) : QObject(parent), m_dashboard(nullptr) {}
 AppSettings::AppSettings(DashBoard *dashboard, QObject *parent) : QObject(parent), m_dashboard(dashboard) {}
 
-AppSettings::~AppSettings() {}
+AppSettings::~AppSettings() = default;
 int AppSettings::getBaudRate()
 {
     return getValue("serial/baudrate").toInt();

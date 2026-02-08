@@ -49,8 +49,11 @@ CompileFlags:
     - "-DQT_MULTIMEDIA_LIB"
     - "-DQT_WIDGETS_LIB"
     
-    # * Suppress common Qt macro warnings
+    # * Suppress noisy compiler warnings
     - "-Wno-unknown-pragmas"
+    - "-Wno-deprecated-declarations"
+    - "-Wno-unused-parameter"
+    - "-Wno-unused-variable"
     
   Remove:
     # * Remove flags that cause issues with clangd
@@ -59,18 +62,16 @@ CompileFlags:
 Diagnostics:
   # * Suppress noisy diagnostics
   Suppress:
-    - "pp_file_not_found"  # Suppress missing Qt header warnings during partial analysis
+    - "pp_file_not_found"
+    - "drv_unknown_argument"
+    - "-Wdeprecated-declarations"
     
+  # * Disable clang-tidy in IDE to reduce noise
+  # * Run clang-tidy manually for thorough checks
   ClangTidy:
-    Add:
-      - "modernize-*"
-      - "readability-*"
-      - "performance-*"
-      - "bugprone-*"
+    Add: []
     Remove:
-      - "modernize-use-trailing-return-type"
-      - "readability-magic-numbers"
-      - "readability-identifier-length"
+      - "*"
 
 InlayHints:
   Enabled: true

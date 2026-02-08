@@ -125,7 +125,7 @@ Connect::Connect(QObject *parent)
 }
 
 
-Connect::~Connect() {}
+Connect::~Connect() = default;
 void Connect::saveDashtoFile(const QString &filename, const QString &dashstring)
 {
     // qDebug()<<"Filename" << filename + "txt";

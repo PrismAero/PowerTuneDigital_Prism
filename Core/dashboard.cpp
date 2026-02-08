@@ -333,7 +333,7 @@ DashBoard::DashBoard(QObject *parent)
 
       // Official Pi screen present screen
       ,
-      m_screen(0)
+      m_screen(false)
 
       ,
       m_accelpedpos(0),
@@ -458,8 +458,7 @@ DashBoard::DashBoard(QObject *parent)
       m_Lastlaptime("00:00.000"),
       m_bestlaptime("00:00.000"),
       m_draggable(0),
-      m_wifi(),
-      m_can(),
+
       m_Analog0(0),
       m_Analog1(0),
       m_Analog2(0),
@@ -646,10 +645,8 @@ DashBoard::DashBoard(QObject *parent)
       m_Externalrpm(0),
       m_language(0),
       m_externalspeedconnectionrequest(),
-      m_externalspeedport()
 
-      // Megasquirt Advanced
-      ,
+
       m_pwseq1(),
       m_pwseq2(),
       m_pwseq3(),
