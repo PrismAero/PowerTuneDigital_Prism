@@ -1,11 +1,12 @@
-#include <QDebug>
+#include "gps.h"
+
+#include "../Core/connect.h"
+#include "../Core/dashboard.h"
+
 #include <QByteArrayMatcher>
+#include <QDebug>
 #include <QTime>
 #include <QTimer>
-
-#include "gps.h"
-#include "../Core/dashboard.h"
-#include "../Core/connect.h"
 
 int initialized = 0;
 int rateset = 0;
@@ -42,25 +43,17 @@ int zeroslope;
 int zeroslope2;
 QString setbaudrate;
 
-GPS::GPS(QObject *parent)
-    : QObject(parent)
-    , m_dashboard(nullptr)
-{
-}
+GPS::GPS(QObject *parent) : QObject(parent), m_dashboard(nullptr) {}
 
-GPS::GPS(DashBoard *dashboard, QObject *parent)
-    : QObject(parent)
-    , m_dashboard(dashboard)
-{
-}
+GPS::GPS(DashBoard *dashboard, QObject *parent) : QObject(parent), m_dashboard(dashboard) {}
 
 void GPS::initSerialPort()
 {
     // qDebug() << "Initialize Serial Port" ;
     m_serialport = new SerialPort(this);
     connect(m_serialport, &QSerialPort::readyRead, this, &GPS::readyToRead);
- //   connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
- //           this, &GPS::handleError);
+    //   connect(m_serialport, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
+    //           this, &GPS::handleError);
     connect(&m_timeouttimer, &QTimer::timeout, this, &GPS::handleTimeout);
 }
 
@@ -82,8 +75,7 @@ void GPS::openConnection(const QString &portName, const QString &Baud)
     m_serialport->setPortName(GPSPort);
 
     m_dashboard->setgpsFIXtype("Start GPS ...");
-    switch (baudrate)
-    {
+    switch (baudrate) {
     case 9600:
         m_serialport->setBaudRate(QSerialPort::Baud9600);
         break;
@@ -101,8 +93,7 @@ void GPS::openConnection(const QString &portName, const QString &Baud)
     m_serialport->setFlowControl(QSerialPort::NoFlowControl);
 
 
-    if (m_serialport->open(QIODevice::ReadWrite) == false)
-    {
+    if (m_serialport->open(QIODevice::ReadWrite) == false) {
         GPS::closeConnection();
     }
 }
@@ -139,16 +130,16 @@ void GPS::setGPS10HZ()
 {
     // qDebug() << "Set 10Hz" ;
     // Set Ublox GPS Update Rate to 10Hz
-    //m_dashboard->setgpsFIXtype("GPS set 10HZ");
+    // m_dashboard->setgpsFIXtype("GPS set 10HZ");
     m_serialport->write(QByteArray::fromHex("b562060806006400010001007a12"));
     m_serialport->waitForBytesWritten(4000);
-
 }
 void GPS::setGPSOnly()
 {
     // Switch on GPS only
     // qDebug() << "set GPS only" ;
-    m_serialport->write(QByteArray::fromHex("B562063E2C0000201005000810000100010101010300000001010308100000000101050003000000010106080E00000001010CD1"));  // GPS Only
+    m_serialport->write(QByteArray::fromHex("B562063E2C0000201005000810000100010101010300000001010308100000000101050003"
+                                            "000000010106080E00000001010CD1"));  // GPS Only
     m_serialport->waitForBytesWritten(4000);
 }
 void GPS::closeConnection()
@@ -163,19 +154,17 @@ void GPS::closeConnection()
 
 void GPS::handleError(QSerialPort::SerialPortError serialPortError)
 {
-    if (m_serialport->errorString() == "No error")
-    {
+    if (m_serialport->errorString() == "No error") {
         // qDebug() << "handle error" << m_serialport->errorString() ;
     }
 }
 
 void GPS::readyToRead()
 {
-    QByteArray rawData = m_serialport->readAll();          // read data from serial port
+    QByteArray rawData = m_serialport->readAll();  // read data from serial port
     // // qDebug()<< "chunk " << rawData;
     line.append(rawData);
-    while (line.contains("\r\n"))
-    {
+    while (line.contains("\r\n")) {
         int end = line.indexOf("\r\n") + 2;
         QByteArray message = line;
         // // qDebug()<< "line raw" << line;
@@ -186,19 +175,19 @@ void GPS::readyToRead()
         ProcessMessage(message);
     }
 
-/*
-    for (int i=0; i < rawData.size(); i++)
-    {
-       //line << rawData[i];
-       line.append(rawData);
-       if (line.size() >= 2 && line[line.size()-2] == '\r' && line[line.size()-1] == '\n')
-       {
-          // qDebug()<< "line " << line;
-          //emit(line);
-          line.clear();
-       }
-    }
-*/
+    /*
+        for (int i=0; i < rawData.size(); i++)
+        {
+           //line << rawData[i];
+           line.append(rawData);
+           if (line.size() >= 2 && line[line.size()-2] == '\r' && line[line.size()-1] == '\n')
+           {
+              // qDebug()<< "line " << line;
+              //emit(line);
+              line.clear();
+           }
+        }
+    */
     /*
     if(this->m_serialport->canReadLine()){
         QByteArray line = m_serialport->readLine();
@@ -215,12 +204,11 @@ void GPS::ProcessMessage(QByteArray messageline)
     // First, we handle any potential binary messages
     if (messageline.contains(ACK10HZ)) {
         // qDebug() << "Received ACK 10Hz";
-        //m_dashboard->setgpsFIXtype("10Hz ACK");
+        // m_dashboard->setgpsFIXtype("10Hz ACK");
         rateset = 1;
-        if (setbaudrate == "9600")
-        {
-        removeNMEAmsg();
-        setGPSBAUD115();
+        if (setbaudrate == "9600") {
+            removeNMEAmsg();
+            setGPSBAUD115();
         }
         return;
     }
@@ -231,9 +219,8 @@ void GPS::ProcessMessage(QByteArray messageline)
         return;
     }
 
-    if (m_dashboard->NMEAlog() ==1 )
-    {
-    logNMEA(messageline);
+    if (m_dashboard->NMEAlog() == 1) {
+        logNMEA(messageline);
     }
     // Then we process the message
     if (messageline.mid(3, 3) == "GGA") {
@@ -254,7 +241,8 @@ void GPS::ProcessMessage(QByteArray messageline)
     */
 }
 
-void GPS::logNMEA(const QString & line){
+void GPS::logNMEA(const QString &line)
+{
     // Check if a log file for today already exists
     QString logfile = QString("%1/%2.nmea").arg("/home/pi").arg(QDate::currentDate().toString("yyyyMMdd"));
     QFile file(logfile);
@@ -283,7 +271,7 @@ void GPS::handleTimeout()
     m_dashboard->setgpsSpeed(0);
     m_dashboard->setgpsTime("0");
     m_dashboard->setgpsHDOP(0);
-    //wait 2 seconds before reconnecting
+    // wait 2 seconds before reconnecting
     QTimer::singleShot(2000, this, &GPS::handleReconnect);
 }
 
@@ -292,18 +280,16 @@ void GPS::handleReconnect()
     // qDebug() << "Reconnecting " ;
     // Timeout will occur if no valid GPS message is reveived for 5 seconds
     // Check what baudrate was used previously and switch
-    if (setbaudrate != "9600")
-    {
-    openConnection(GPSPort, "9600");
-    }
-    else
-    {
-    openConnection(GPSPort, "115200");
+    if (setbaudrate != "9600") {
+        openConnection(GPSPort, "9600");
+    } else {
+        openConnection(GPSPort, "115200");
     }
 }
 
 
-void GPS::processGPRMC(const QString & line) {
+void GPS::processGPRMC(const QString &line)
+{
     QStringList fields = line.split(',');
     QString time = fields[1];
     time.insert(2, ":");
@@ -314,8 +300,7 @@ void GPS::processGPRMC(const QString & line) {
 
     QString groundspeedknots = fields[7];
     QString bearing = fields[8];
-    if (bearing != "")
-    {
+    if (bearing != "") {
         // We update bearing only if we have a valid bearing
         m_dashboard->setgpsbearing(bearing.toDouble());
     }
@@ -323,20 +308,20 @@ void GPS::processGPRMC(const QString & line) {
     double speed = groundspeedknots.toDouble() * 1.852;
 
 
-    if ((m_dashboard->gpsFIXtype() == "GPS only") ||(m_dashboard->gpsFIXtype() == "DGPS") )
-    {
-    m_dashboard->setgpsLatitude(decLat);
-    m_dashboard->setgpsLongitude(decLon);
-  //  if ((hdop >= 20) || (speed >= 20))           // This avoids that the GPS speed fluctuates when standing and hdop is low
-  //     {
-       m_dashboard->setgpsSpeed(qRound(speed));  // round speed to the nearest integer
-  //     }
-    checknewLap();
+    if ((m_dashboard->gpsFIXtype() == "GPS only") || (m_dashboard->gpsFIXtype() == "DGPS")) {
+        m_dashboard->setgpsLatitude(decLat);
+        m_dashboard->setgpsLongitude(decLon);
+        //  if ((hdop >= 20) || (speed >= 20))           // This avoids that the GPS speed fluctuates when standing and
+        //  hdop is low
+        //     {
+        m_dashboard->setgpsSpeed(qRound(speed));  // round speed to the nearest integer
+                                                  //     }
+        checknewLap();
     }
     m_dashboard->setgpsTime(time);
 }
 
-void GPS::processGPGGA(const QString & line)
+void GPS::processGPGGA(const QString &line)
 {
     QStringList fields = line.split(',');
     int fixquality = fields[6].toInt();
@@ -363,30 +348,29 @@ void GPS::processGPGGA(const QString & line)
 
     QString satelitesinview = fields[7];
     QString altitude = fields[9];
-    if ((m_dashboard->gpsFIXtype() == "GPS only") ||(m_dashboard->gpsFIXtype() == "DGPS") )
-    {
-    m_dashboard->setgpsLatitude(decLat);
-    m_dashboard->setgpsLongitude(decLon);
-    m_dashboard->setgpsAltitude(altitude.toDouble());
-    checknewLap();
+    if ((m_dashboard->gpsFIXtype() == "GPS only") || (m_dashboard->gpsFIXtype() == "DGPS")) {
+        m_dashboard->setgpsLatitude(decLat);
+        m_dashboard->setgpsLongitude(decLon);
+        m_dashboard->setgpsAltitude(altitude.toDouble());
+        checknewLap();
     }
     m_dashboard->setgpsVisibleSatelites(satelitesinview.toInt());
 }
 
-void GPS::processGPVTG(const QString & line)
+void GPS::processGPVTG(const QString &line)
 {
     QStringList fields = line.split(',');
     QString speed = fields[7];
     // m_dashboard->setgpsSpeed(speed.toInt());
 }
 
-float GPS::convertToFloat(const QString & coord, const QString & dir)
+float GPS::convertToFloat(const QString &coord, const QString &dir)
 {
     int decIndex = coord.indexOf('.');
-    QString minutes = coord.mid(decIndex- 2);
-    QString seconds = coord.mid(decIndex+1, 2);
+    QString minutes = coord.mid(decIndex - 2);
+    QString seconds = coord.mid(decIndex + 1, 2);
     float dec = minutes.toDouble() * 60 / 3600;
-    float degrees = coord.mid(0, decIndex -2).toDouble();
+    float degrees = coord.mid(0, decIndex - 2).toDouble();
     float decCoord = dec + degrees;
     if (dir == "W" || dir == "S")
         decCoord *= -1.0;
@@ -394,7 +378,7 @@ float GPS::convertToFloat(const QString & coord, const QString & dir)
 }
 
 // Laptimer
-void GPS::defineFinishLine(const qreal & Y1, const qreal & X1, const qreal & Y2, const qreal & X2)
+void GPS::defineFinishLine(const qreal &Y1, const qreal &X1, const qreal &Y2, const qreal &X2)
 {
     // linedirection = linedir;
 
@@ -402,44 +386,41 @@ void GPS::defineFinishLine(const qreal & Y1, const qreal & X1, const qreal & Y2,
     startlineX2 = X2;  // Longitude
     startlineY1 = Y1;  // Latitude
     startlineY2 = Y2;  // Latitude
-    m = (startlineY1-startlineY2) / (startlineX1-startlineX2);
+    m = (startlineY1 - startlineY2) / (startlineX1 - startlineX2);
 
-    if (startlineX1 == startlineX2)
-    {
-         b = startlineY1;
+    if (startlineX1 == startlineX2) {
+        b = startlineY1;
         zeroslope = 0;
     }
 
-    if (startlineY1 == startlineY2)
-    {
+    if (startlineY1 == startlineY2) {
         zeroslope = 0;
         b = startlineY1;
     }
-    if ((startlineY1 != startlineY2) && (startlineX1 != startlineX2))
-    {
+    if ((startlineY1 != startlineY2) && (startlineX1 != startlineX2)) {
         zeroslope = 1;
-        b = startlineY1 - (m*startlineX1);
+        b = startlineY1 - (m * startlineX1);
     }
 }
 
-void GPS::defineFinishLine2(const qreal & Y1, const qreal & X1, const qreal & Y2, const qreal & X2)
+void GPS::defineFinishLine2(const qreal &Y1, const qreal &X1, const qreal &Y2, const qreal &X2)
 {
     start2lineX1 = X1;  // Longitude
     start2lineX2 = X2;  // Longitude
     start2lineY1 = Y1;  // Latitude
     start2lineY2 = Y2;  // Latitude
-    m2 = (start2lineY1-start2lineY2) / (start2lineX1-start2lineX2);
-    if (start2lineX1 ==  start2lineX2) {
-         b2 = start2lineY1;
+    m2 = (start2lineY1 - start2lineY2) / (start2lineX1 - start2lineX2);
+    if (start2lineX1 == start2lineX2) {
+        b2 = start2lineY1;
         zeroslope2 = 0;
     }
-    if (start2lineY1 ==  start2lineY2) {
+    if (start2lineY1 == start2lineY2) {
         zeroslope2 = 0;
         b2 = start2lineY1;
     }
-    if ((start2lineX1 !=  start2lineX2) && (start2lineY1 !=  start2lineY2)) {
+    if ((start2lineX1 != start2lineX2) && (start2lineY1 != start2lineY2)) {
         zeroslope2 = 1;
-        b2 = start2lineY1 - (m2*start2lineX1);
+        b2 = start2lineY1 - (m2 * start2lineX1);
     }
 }
 void GPS::resetLaptimer()
@@ -455,7 +436,8 @@ void GPS::checknewLap()
 
     // Somehow we need to add something that if the Second Finishline exists it needs to stop the timer
     if (zeroslope == 1) {
-        currentintercept = m_dashboard->gpsLatitude() -( (m * m_dashboard->gpsLongitude()) + b);     // needed for Finish Line1
+        currentintercept =
+            m_dashboard->gpsLatitude() - ((m * m_dashboard->gpsLongitude()) + b);  // needed for Finish Line1
     }
     if (zeroslope == 0) {
         currentintercept = m_dashboard->gpsLatitude() - b;
@@ -464,27 +446,29 @@ void GPS::checknewLap()
     // Intercept 2  for second finish line
 
     if (zeroslope2 != 0) {
-        currentintercept2 = m_dashboard->gpsLatitude() -( (m2 * m_dashboard->gpsLongitude()) + b2);  // needed for Finish Line2
+        currentintercept2 =
+            m_dashboard->gpsLatitude() - ((m2 * m_dashboard->gpsLongitude()) + b2);  // needed for Finish Line2
     } else {
         currentintercept2 = m_dashboard->gpsLatitude() - b2;  // needed for Finish Line2
     }
 
-    if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) || (currentintercept == 0) ||(previousintercept2 <= 0 && currentintercept2 >= 0) || (previousintercept2 >= 0 && currentintercept2 <= 0) || (currentintercept2 == 0))
-    {
+    if ((previousintercept <= 0 && currentintercept >= 0) || (previousintercept >= 0 && currentintercept <= 0) ||
+        (currentintercept == 0) || (previousintercept2 <= 0 && currentintercept2 >= 0) ||
+        (previousintercept2 >= 0 && currentintercept2 <= 0) || (currentintercept2 == 0)) {
         // Finish Line 1
-        if ((((m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1 )) || ((m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1 ))) ||(((m_dashboard->gpsLongitude() <= startlineX1 && m_dashboard->gpsLongitude() >= startlineX2 )) || ((m_dashboard->gpsLatitude() <= startlineY1 && m_dashboard->gpsLatitude() >= startlineY2 ))))
-        {
+        if ((((m_dashboard->gpsLongitude() <= startlineX2 && m_dashboard->gpsLongitude() >= startlineX1)) ||
+             ((m_dashboard->gpsLatitude() <= startlineY2 && m_dashboard->gpsLatitude() >= startlineY1))) ||
+            (((m_dashboard->gpsLongitude() <= startlineX1 && m_dashboard->gpsLongitude() >= startlineX2)) ||
+             ((m_dashboard->gpsLatitude() <= startlineY1 && m_dashboard->gpsLatitude() >= startlineY2)))) {
             if (m_timer.isValid() == true) {
                 QTime y(0, 0);
                 y = y.addMSecs(m_timer.elapsed());
-                if (Laps == 1)
-                {
+                if (Laps == 1) {
                     fastestlap = y;
                     m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
                 }
-                if (y < fastestlap)
-                {
-                   // // qDebug() << "y is smaller";
+                if (y < fastestlap) {
+                    // // qDebug() << "y is smaller";
                     fastestlap = y;
                     m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
                 }
@@ -504,8 +488,10 @@ void GPS::checknewLap()
         }
 
 
-        if ((((m_dashboard->gpsLongitude() <= start2lineX2 && m_dashboard->gpsLongitude() >= start2lineX1 ))||((m_dashboard->gpsLatitude() <= start2lineY2 && m_dashboard->gpsLatitude() >= start2lineY1 ))) || (((m_dashboard->gpsLongitude() <= start2lineX1 && m_dashboard->gpsLongitude() >= start2lineX2 ))||((m_dashboard->gpsLatitude() <= start2lineY1 && m_dashboard->gpsLatitude() >= start2lineY2 ))))
-        {
+        if ((((m_dashboard->gpsLongitude() <= start2lineX2 && m_dashboard->gpsLongitude() >= start2lineX1)) ||
+             ((m_dashboard->gpsLatitude() <= start2lineY2 && m_dashboard->gpsLatitude() >= start2lineY1))) ||
+            (((m_dashboard->gpsLongitude() <= start2lineX1 && m_dashboard->gpsLongitude() >= start2lineX2)) ||
+             ((m_dashboard->gpsLatitude() <= start2lineY1 && m_dashboard->gpsLatitude() >= start2lineY2)))) {
             if (m_timer.isValid() == true) {
                 QTime y(0, 0);
                 y = y.addMSecs(m_timer.elapsed());
@@ -514,9 +500,9 @@ void GPS::checknewLap()
                     m_dashboard->setbestlaptime(fastestlap.toString("mm:ss.zzz"));
                 }
                 if (y < fastestlap) {
-                   // // qDebug() << "y is smaller";
-                   fastestlap = y;
-                   m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
+                    // // qDebug() << "y is smaller";
+                    fastestlap = y;
+                    m_dashboard->setbestlaptime(y.toString("mm:ss.zzz"));
                 }
                 Laps++;
                 m_dashboard->setlaptime(y.toString("mm:ss.zzz"));

@@ -8,30 +8,19 @@
  */
 
 #include "obd.h"
+
 #include "../Core/dashboard.h"
 #include "../Core/serialport.h"
 
 #include <QDebug>
 
 OBD::OBD(QObject *parent)
-    : QObject(parent)
-    , m_dashboard(nullptr)
-    , m_serial(nullptr)
-    , m_ecuList(nullptr)
-    , m_bytesWritten(0)
-    , m_units(0)
-{
-}
+    : QObject(parent), m_dashboard(nullptr), m_serial(nullptr), m_ecuList(nullptr), m_bytesWritten(0), m_units(0)
+{}
 
 OBD::OBD(DashBoard *dashboard, QObject *parent)
-    : QObject(parent)
-    , m_dashboard(dashboard)
-    , m_serial(nullptr)
-    , m_ecuList(nullptr)
-    , m_bytesWritten(0)
-    , m_units(0)
-{
-}
+    : QObject(parent), m_dashboard(dashboard), m_serial(nullptr), m_ecuList(nullptr), m_bytesWritten(0), m_units(0)
+{}
 
 void OBD::clear() const
 {
@@ -120,20 +109,20 @@ void OBD::handleError(QSerialPort::SerialPortError error)
 
 void OBD::messageconstructor(const QByteArray &buffer)
 {
-    // TODO: Implement OBD message parsing
-    // ! This is a stub implementation
+// TODO: Implement OBD message parsing
+// ! This is a stub implementation
     Q_UNUSED(buffer)
 }
 
-void OBD::sendRequest(int requestIndex)
-{
+    void OBD::sendRequest(int requestIndex)
+    {
     // TODO: Implement OBD request sending
     // ! This is a stub implementation
     Q_UNUSED(requestIndex)
 }
 
-void OBD::readData(QByteArray serialdata)
-{
+    void OBD::readData(QByteArray serialdata)
+    {
     // TODO: Implement OBD data processing
     // ! This is a stub implementation
     Q_UNUSED(serialdata)

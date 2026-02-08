@@ -1,8 +1,8 @@
 #ifndef DASHBOARD_H
 #define DASHBOARD_H
 
-#include <QStringList>
 #include <QObject>
+#include <QStringList>
 
 // * Forward declarations for sub-model classes (TODO-001: DashBoard God Object refactoring)
 class EngineData;
@@ -22,20 +22,20 @@ class DashBoard : public QObject
     // * Sub-model accessors for QML (TODO-001: DashBoard God Object refactoring)
     // ! These expose domain-specific data models for cleaner QML bindings
     // ! Example: Dashboard.engine.rpm instead of Dashboard.rpm
-    Q_PROPERTY(EngineData* engine READ engine CONSTANT)
-    Q_PROPERTY(VehicleData* vehicle READ vehicle CONSTANT)
-    Q_PROPERTY(GPSData* gps READ gps CONSTANT)
-    Q_PROPERTY(AnalogInputs* analog READ analog CONSTANT)
-    Q_PROPERTY(DigitalInputs* digital READ digital CONSTANT)
-    Q_PROPERTY(ExpanderBoardData* expander READ expander CONSTANT)
-    Q_PROPERTY(ElectricMotorData* emotor READ emotor CONSTANT)
-    Q_PROPERTY(FlagsData* flags READ flags CONSTANT)
-    Q_PROPERTY(TimingData* timing READ timing CONSTANT)
+    Q_PROPERTY(EngineData *engine READ engine CONSTANT)
+    Q_PROPERTY(VehicleData *vehicle READ vehicle CONSTANT)
+    Q_PROPERTY(GPSData *gps READ gps CONSTANT)
+    Q_PROPERTY(AnalogInputs *analog READ analog CONSTANT)
+    Q_PROPERTY(DigitalInputs *digital READ digital CONSTANT)
+    Q_PROPERTY(ExpanderBoardData *expander READ expander CONSTANT)
+    Q_PROPERTY(ElectricMotorData *emotor READ emotor CONSTANT)
+    Q_PROPERTY(FlagsData *flags READ flags CONSTANT)
+    Q_PROPERTY(TimingData *timing READ timing CONSTANT)
 
     // Odometer
     Q_PROPERTY(qreal Odo READ Odo WRITE setOdo NOTIFY odoChanged)
     Q_PROPERTY(qreal Cylinders READ Cylinders WRITE setCylinders NOTIFY CylindersChanged)
-    //Tripmeter
+    // Tripmeter
     Q_PROPERTY(qreal Trip READ Trip WRITE setTrip NOTIFY tripChanged)
     Q_PROPERTY(qreal NMEAlog READ NMEAlog WRITE setNMEAlog NOTIFY NMEAlogChanged)
     // Advanced Info
@@ -89,7 +89,6 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal O2volt_2 READ O2volt_2 WRITE setO2volt_2 NOTIFY o2volt_2Changed)
 
 
-
     // Sensor Voltage
     Q_PROPERTY(qreal sens1 READ sens1 WRITE setsens1 NOTIFY sens1Changed)
     Q_PROPERTY(qreal sens2 READ sens2 WRITE setsens2 NOTIFY sens2Changed)
@@ -134,7 +133,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Flag24 READ Flag24 WRITE setFlag24 NOTIFY flag24Changed)
     Q_PROPERTY(qreal Flag25 READ Flag25 WRITE setFlag25 NOTIFY flag25Changed)
 
-    //Flag Strings
+    // Flag Strings
     Q_PROPERTY(QString FlagString1 READ FlagString1 WRITE setFlagString1 NOTIFY flagString1Changed)
     Q_PROPERTY(QString FlagString2 READ FlagString2 WRITE setFlagString2 NOTIFY flagString2Changed)
     Q_PROPERTY(QString FlagString3 READ FlagString3 WRITE setFlagString3 NOTIFY flagString3Changed)
@@ -177,7 +176,7 @@ class DashBoard : public QObject
     Q_PROPERTY(QString CBXCountrysave READ CBXCountrysave WRITE setCBXCountrysave NOTIFY CBXCountrysaveChanged)
     Q_PROPERTY(QString CBXTracksave READ CBXTracksave WRITE setCBXTracksave NOTIFY CBXTracksaveChanged)
 
-    //Adaptronic extra
+    // Adaptronic extra
 
     Q_PROPERTY(qreal MAP READ MAP WRITE setMAP NOTIFY mAPChanged)
     Q_PROPERTY(qreal PANVAC READ PANVAC WRITE setPANVAC NOTIFY PANVACChanged)
@@ -185,10 +184,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal MAP2 READ MAP2 WRITE setMAP2 NOTIFY mAP2Changed)
     Q_PROPERTY(qreal AUXT READ AUXT WRITE setAUXT NOTIFY aUXTChanged)
     Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
-    Q_PROPERTY(qreal AFRLEFTBANKTARGET READ AFRLEFTBANKTARGET WRITE setAFRLEFTBANKTARGET NOTIFY AFRLEFTBANKTARGETChanged)
-    Q_PROPERTY(qreal AFRRIGHTBANKTARGET READ AFRRIGHTBANKTARGET WRITE setAFRRIGHTBANKTARGET NOTIFY AFRRIGHTBANKTARGETChanged)
-    Q_PROPERTY(qreal AFRLEFTBANKACTUAL READ AFRLEFTBANKACTUAL WRITE setAFRLEFTBANKACTUAL NOTIFY AFRLEFTBANKACTUALChanged)
-    Q_PROPERTY(qreal AFRRIGHTBANKACTUAL READ AFRRIGHTBANKACTUAL WRITE setAFRRIGHTBANKACTUAL NOTIFY AFRRIGHTBANKACTUALChanged)
+    Q_PROPERTY(
+        qreal AFRLEFTBANKTARGET READ AFRLEFTBANKTARGET WRITE setAFRLEFTBANKTARGET NOTIFY AFRLEFTBANKTARGETChanged)
+    Q_PROPERTY(
+        qreal AFRRIGHTBANKTARGET READ AFRRIGHTBANKTARGET WRITE setAFRRIGHTBANKTARGET NOTIFY AFRRIGHTBANKTARGETChanged)
+    Q_PROPERTY(
+        qreal AFRLEFTBANKACTUAL READ AFRLEFTBANKACTUAL WRITE setAFRLEFTBANKACTUAL NOTIFY AFRLEFTBANKACTUALChanged)
+    Q_PROPERTY(
+        qreal AFRRIGHTBANKACTUAL READ AFRRIGHTBANKACTUAL WRITE setAFRRIGHTBANKACTUAL NOTIFY AFRRIGHTBANKACTUALChanged)
     Q_PROPERTY(qreal BOOSTOFFSET READ BOOSTOFFSET WRITE setBOOSTOFFSET NOTIFY BOOSTOFFSETChanged)
     Q_PROPERTY(qreal REVLIM3STEP READ REVLIM3STEP WRITE setREVLIM3STEP NOTIFY REVLIM3STEPChanged)
     Q_PROPERTY(qreal REVLIM2STEP READ REVLIM2STEP WRITE setREVLIM2STEP NOTIFY REVLIM2STEPChanged)
@@ -196,7 +199,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal REVLIMBOURNOUT READ REVLIMBOURNOUT WRITE setREVLIMBOURNOUT NOTIFY REVLIMBOURNOUTChanged)
     Q_PROPERTY(qreal LEFTBANKO2CORR READ LEFTBANKO2CORR WRITE setLEFTBANKO2CORR NOTIFY LEFTBANKO2CORRChanged)
     Q_PROPERTY(qreal RIGHTBANKO2CORR READ RIGHTBANKO2CORR WRITE setRIGHTBANKO2CORR NOTIFY RIGHTBANKO2CORRChanged)
-    Q_PROPERTY(qreal TRACTIONCTRLOFFSET READ TRACTIONCTRLOFFSET WRITE setTRACTIONCTRLOFFSET NOTIFY TRACTIONCTRLOFFSETChanged)
+    Q_PROPERTY(
+        qreal TRACTIONCTRLOFFSET READ TRACTIONCTRLOFFSET WRITE setTRACTIONCTRLOFFSET NOTIFY TRACTIONCTRLOFFSETChanged)
     Q_PROPERTY(qreal DRIVESHAFTOFFSET READ DRIVESHAFTOFFSET WRITE setDRIVESHAFTOFFSET NOTIFY DRIVESHAFTOFFSETChanged)
     Q_PROPERTY(qreal TCCOMMAND READ TCCOMMAND WRITE setTCCOMMAND NOTIFY TCCOMMANDChanged)
     Q_PROPERTY(qreal FSLCOMMAND READ FSLCOMMAND WRITE setFSLCOMMAND NOTIFY FSLCOMMANDChanged)
@@ -229,7 +233,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal FuelPress READ FuelPress WRITE setFuelPress NOTIFY fuelPressChanged)
     Q_PROPERTY(qreal GearOilPress READ GearOilPress WRITE setGearOilPress NOTIFY GearOilPressChanged)
 
-    //GPS Strings
+    // GPS Strings
 
 
     Q_PROPERTY(QString gpsTime READ gpsTime WRITE setgpsTime NOTIFY gpsTimeChanged)
@@ -237,16 +241,17 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal gpsLatitude READ gpsLatitude WRITE setgpsLatitude NOTIFY gpsLatitudeChanged)
     Q_PROPERTY(qreal gpsLongitude READ gpsLongitude WRITE setgpsLongitude NOTIFY gpsLongitudeChanged)
     Q_PROPERTY(qreal gpsSpeed READ gpsSpeed WRITE setgpsSpeed NOTIFY gpsSpeedChanged)
-    Q_PROPERTY(int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
-    Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype  WRITE setgpsFIXtype  NOTIFY gpsFIXtypeChanged)
+    Q_PROPERTY(
+        int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
+    Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype WRITE setgpsFIXtype NOTIFY gpsFIXtypeChanged)
     Q_PROPERTY(qreal gpsbearing READ gpsbearing WRITE setgpsbearing NOTIFY gpsbearingChanged)
     Q_PROPERTY(qreal gpsHDOP READ gpsHDOP WRITE setgpsHDOP NOTIFY gpsHDOPChanged)
 
-    //Units ( metric /imperial select
+    // Units ( metric /imperial select
     Q_PROPERTY(QString units READ units WRITE setunits NOTIFY unitsChanged)
     Q_PROPERTY(QString speedunits READ speedunits WRITE setspeedunits NOTIFY speedunitsChanged)
     Q_PROPERTY(QString pressureunits READ pressureunits WRITE setpressureunits NOTIFY pressureunitsChanged)
-    //Qsensors
+    // Qsensors
     Q_PROPERTY(qreal accelx READ accelx WRITE setaccelx NOTIFY accelxChanged)
     Q_PROPERTY(qreal accely READ accely WRITE setaccely NOTIFY accelyChanged)
     Q_PROPERTY(qreal accelz READ accelz WRITE setaccelz NOTIFY accelzChanged)
@@ -257,7 +262,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal ambitemp READ ambitemp WRITE setambitemp NOTIFY ambitempChanged)
     Q_PROPERTY(qreal ambipress READ ambipress WRITE setambipress NOTIFY ambipressChanged)
 
-    //Calculations
+    // Calculations
     Q_PROPERTY(qreal Gear READ Gear WRITE setGear NOTIFY GearChanged)
     Q_PROPERTY(qreal Gearoffset READ Gearoffset WRITE setGearoffset NOTIFY GearoffsetChanged)
 
@@ -268,10 +273,10 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal AccelTimer READ AccelTimer WRITE setAccelTimer NOTIFY accelTimerChanged)
     Q_PROPERTY(qreal Weight READ Weight WRITE setWeight NOTIFY weightChanged)
 
-    //Official Pi screen present screen
+    // Official Pi screen present screen
     Q_PROPERTY(bool screen READ screen WRITE setscreen NOTIFY screenChanged)
 
-    //User Dashboard Stringlist dashsetup
+    // User Dashboard Stringlist dashsetup
 
     Q_PROPERTY(QStringList maindashsetup READ maindashsetup WRITE setmaindashsetup NOTIFY maindashsetupChanged)
     Q_PROPERTY(QStringList dashsetup3 READ dashsetup3 WRITE setdashsetup3 NOTIFY dashsetup3Changed)
@@ -280,18 +285,22 @@ class DashBoard : public QObject
 
 
     Q_PROPERTY(QStringList dashfiles READ dashfiles WRITE setdashfiles NOTIFY dashfilesChanged)
-    Q_PROPERTY(QStringList backroundpictures READ backroundpictures WRITE setbackroundpictures NOTIFY backroundpicturesChanged)
+    Q_PROPERTY(
+        QStringList backroundpictures READ backroundpictures WRITE setbackroundpictures NOTIFY backroundpicturesChanged)
 
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
     Q_PROPERTY(qreal airtempensor2 READ airtempensor2 WRITE setairtempensor2 NOTIFY airtempensor2Changed)
-    Q_PROPERTY(qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
+    Q_PROPERTY(
+        qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
     Q_PROPERTY(qreal antilaglaunchon READ antilaglaunchon WRITE setantilaglaunchon NOTIFY antilaglaunchonChanged)
-    Q_PROPERTY(qreal auxrevlimitswitch READ auxrevlimitswitch WRITE setauxrevlimitswitch NOTIFY auxrevlimitswitchChanged)
+    Q_PROPERTY(
+        qreal auxrevlimitswitch READ auxrevlimitswitch WRITE setauxrevlimitswitch NOTIFY auxrevlimitswitchChanged)
     Q_PROPERTY(qreal avfueleconomy READ avfueleconomy WRITE setavfueleconomy NOTIFY avfueleconomyChanged)
     Q_PROPERTY(qreal battlight READ battlight WRITE setbattlight NOTIFY battlightChanged)
     Q_PROPERTY(qreal boostcontrol READ boostcontrol WRITE setboostcontrol NOTIFY boostcontrolChanged)
     Q_PROPERTY(qreal brakepress READ brakepress WRITE setbrakepress NOTIFY brakepressChanged)
-    Q_PROPERTY(qreal clutchswitchstate READ clutchswitchstate WRITE setclutchswitchstate NOTIFY clutchswitchstateChanged)
+    Q_PROPERTY(
+        qreal clutchswitchstate READ clutchswitchstate WRITE setclutchswitchstate NOTIFY clutchswitchstateChanged)
     Q_PROPERTY(qreal coolantpress READ coolantpress WRITE setcoolantpress NOTIFY coolantpressChanged)
     Q_PROPERTY(qreal decelcut READ decelcut WRITE setdecelcut NOTIFY decelcutChanged)
     Q_PROPERTY(qreal diffoiltemp READ diffoiltemp WRITE setdiffoiltemp NOTIFY diffoiltempChanged)
@@ -319,10 +328,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal fuelflow READ fuelflow WRITE setfuelflow NOTIFY fuelflowChanged)
     Q_PROPERTY(qreal fuelflowdiff READ fuelflowdiff WRITE setfuelflowdiff NOTIFY fuelflowdiffChanged)
     Q_PROPERTY(qreal fuelflowret READ fuelflowret WRITE setfuelflowret NOTIFY fuelflowretChanged)
-    Q_PROPERTY(qreal fueltrimlongtbank1 READ fueltrimlongtbank1 WRITE setfueltrimlongtbank1 NOTIFY fueltrimlongtbank1Changed)
-    Q_PROPERTY(qreal fueltrimlongtbank2 READ fueltrimlongtbank2 WRITE setfueltrimlongtbank2 NOTIFY fueltrimlongtbank2Changed)
-    Q_PROPERTY(qreal fueltrimshorttbank1 READ fueltrimshorttbank1 WRITE setfueltrimshorttbank1 NOTIFY fueltrimshorttbank1Changed)
-    Q_PROPERTY(qreal fueltrimshorttbank2 READ fueltrimshorttbank2 WRITE setfueltrimshorttbank2 NOTIFY fueltrimshorttbank2Changed)
+    Q_PROPERTY(
+        qreal fueltrimlongtbank1 READ fueltrimlongtbank1 WRITE setfueltrimlongtbank1 NOTIFY fueltrimlongtbank1Changed)
+    Q_PROPERTY(
+        qreal fueltrimlongtbank2 READ fueltrimlongtbank2 WRITE setfueltrimlongtbank2 NOTIFY fueltrimlongtbank2Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank1 READ fueltrimshorttbank1 WRITE setfueltrimshorttbank1 NOTIFY
+                   fueltrimshorttbank1Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank2 READ fueltrimshorttbank2 WRITE setfueltrimshorttbank2 NOTIFY
+                   fueltrimshorttbank2Changed)
     Q_PROPERTY(qreal gearswitch READ gearswitch WRITE setgearswitch NOTIFY gearswitchChanged)
     Q_PROPERTY(qreal handbrake READ handbrake WRITE sethandbrake NOTIFY handbrakeChanged)
     Q_PROPERTY(qreal highbeam READ highbeam WRITE sethighbeam NOTIFY highbeamChanged)
@@ -338,8 +351,10 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal lambda2 READ lambda2 WRITE setlambda2 NOTIFY lambda2Changed)
     Q_PROPERTY(qreal lambda3 READ lambda3 WRITE setlambda3 NOTIFY lambda3Changed)
     Q_PROPERTY(qreal lambda4 READ lambda4 WRITE setlambda4 NOTIFY lambda4Changed)
-    Q_PROPERTY(qreal launchcontolfuelenrich READ launchcontolfuelenrich WRITE setlaunchcontolfuelenrich NOTIFY launchcontolfuelenrichChanged)
-    Q_PROPERTY(qreal launchctrolignretard READ launchctrolignretard WRITE setlaunchctrolignretard NOTIFY launchctrolignretardChanged)
+    Q_PROPERTY(qreal launchcontolfuelenrich READ launchcontolfuelenrich WRITE setlaunchcontolfuelenrich NOTIFY
+                   launchcontolfuelenrichChanged)
+    Q_PROPERTY(qreal launchctrolignretard READ launchctrolignretard WRITE setlaunchctrolignretard NOTIFY
+                   launchctrolignretardChanged)
     Q_PROPERTY(qreal leftindicator READ leftindicator WRITE setleftindicator NOTIFY leftindicatorChanged)
     Q_PROPERTY(qreal limpmode READ limpmode WRITE setlimpmode NOTIFY limpmodeChanged)
     Q_PROPERTY(qreal mil READ mil WRITE setmil NOTIFY milChanged)
@@ -349,18 +364,24 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal nosswitch READ nosswitch WRITE setnosswitch NOTIFY nosswitchChanged)
     Q_PROPERTY(qreal oilpres READ oilpres WRITE setoilpres NOTIFY oilpresChanged)
     Q_PROPERTY(qreal oiltemp READ oiltemp WRITE setoiltemp NOTIFY oiltempChanged)
-    Q_PROPERTY(qreal rallyantilagswitch READ rallyantilagswitch WRITE setrallyantilagswitch NOTIFY rallyantilagswitchChanged)
+    Q_PROPERTY(
+        qreal rallyantilagswitch READ rallyantilagswitch WRITE setrallyantilagswitch NOTIFY rallyantilagswitchChanged)
     Q_PROPERTY(qreal rightindicator READ rightindicator WRITE setrightindicator NOTIFY rightindicatorChanged)
     Q_PROPERTY(qreal targetbstlelkpa READ targetbstlelkpa WRITE settargetbstlelkpa NOTIFY targetbstlelkpaChanged)
     Q_PROPERTY(qreal timeddutyout1 READ timeddutyout1 WRITE settimeddutyout1 NOTIFY timeddutyout1Changed)
     Q_PROPERTY(qreal timeddutyout2 READ timeddutyout2 WRITE settimeddutyout2 NOTIFY timeddutyout2Changed)
-    Q_PROPERTY(qreal timeddutyoutputactive READ timeddutyoutputactive WRITE settimeddutyoutputactive NOTIFY timeddutyoutputactiveChanged)
-    Q_PROPERTY(qreal torqueredcutactive READ torqueredcutactive WRITE settorqueredcutactive NOTIFY torqueredcutactiveChanged)
-    Q_PROPERTY(qreal torqueredlevelactive READ torqueredlevelactive WRITE settorqueredlevelactive NOTIFY torqueredlevelactiveChanged)
-    Q_PROPERTY(qreal transientthroactive READ transientthroactive WRITE settransientthroactive NOTIFY transientthroactiveChanged)
+    Q_PROPERTY(qreal timeddutyoutputactive READ timeddutyoutputactive WRITE settimeddutyoutputactive NOTIFY
+                   timeddutyoutputactiveChanged)
+    Q_PROPERTY(
+        qreal torqueredcutactive READ torqueredcutactive WRITE settorqueredcutactive NOTIFY torqueredcutactiveChanged)
+    Q_PROPERTY(qreal torqueredlevelactive READ torqueredlevelactive WRITE settorqueredlevelactive NOTIFY
+                   torqueredlevelactiveChanged)
+    Q_PROPERTY(qreal transientthroactive READ transientthroactive WRITE settransientthroactive NOTIFY
+                   transientthroactiveChanged)
     Q_PROPERTY(qreal transoiltemp READ transoiltemp WRITE settransoiltemp NOTIFY transoiltempChanged)
     Q_PROPERTY(qreal triggerccounter READ triggerccounter WRITE settriggerccounter NOTIFY triggerccounterChanged)
-    Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY triggersrsinceasthomeChanged)
+    Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY
+                   triggersrsinceasthomeChanged)
     Q_PROPERTY(qreal turborpm READ turborpm WRITE setturborpm NOTIFY turborpmChanged)
     Q_PROPERTY(qreal turborpm2 READ turborpm2 WRITE setturborpm2 NOTIFY turborpm2Changed)
     Q_PROPERTY(qreal wastegatepress READ wastegatepress WRITE setwastegatepress NOTIFY wastegatepressChanged)
@@ -369,8 +390,9 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
     Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
     Q_PROPERTY(qreal wheelspdrearleft READ wheelspdrearleft WRITE setwheelspdrearleft NOTIFY wheelspdrearleftChanged)
-    Q_PROPERTY(qreal wheelspdrearright READ wheelspdrearright WRITE setwheelspdrearright NOTIFY wheelspdrearrightChanged)
-    //Path for musicfiles
+    Q_PROPERTY(
+        qreal wheelspdrearright READ wheelspdrearright WRITE setwheelspdrearright NOTIFY wheelspdrearrightChanged)
+    // Path for musicfiles
     Q_PROPERTY(QString musicpath READ musicpath WRITE setmusicpath NOTIFY musicpathChanged)
 
     Q_PROPERTY(int supportedReg READ supportedReg WRITE setsupportedReg NOTIFY supportedRegChanged)
@@ -389,7 +411,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal boostwarn READ boostwarn WRITE setboostwarn NOTIFY boostwarnChanged)
     Q_PROPERTY(int smoothrpm READ smoothrpm WRITE setsmoothrpm NOTIFY smoothrpmChanged)
     Q_PROPERTY(int smoothspeed READ smoothspeed WRITE setsmoothspeed NOTIFY smoothspeedChanged)
-    Q_PROPERTY(int smootexAnalogInput7 READ smootexAnalogInput7 WRITE setsmootexAnalogInput7 NOTIFY smootexAnalogInput7Changed)
+    Q_PROPERTY(
+        int smootexAnalogInput7 READ smootexAnalogInput7 WRITE setsmootexAnalogInput7 NOTIFY smootexAnalogInput7Changed)
 
     Q_PROPERTY(int gearcalc1 READ gearcalc1 WRITE setgearcalc1 NOTIFY gearcalc1Changed)
     Q_PROPERTY(int gearcalc2 READ gearcalc2 WRITE setgearcalc2 NOTIFY gearcalc2Changed)
@@ -397,7 +420,8 @@ class DashBoard : public QObject
     Q_PROPERTY(int gearcalc4 READ gearcalc4 WRITE setgearcalc4 NOTIFY gearcalc4Changed)
     Q_PROPERTY(int gearcalc5 READ gearcalc5 WRITE setgearcalc5 NOTIFY gearcalc5Changed)
     Q_PROPERTY(int gearcalc6 READ gearcalc6 WRITE setgearcalc6 NOTIFY gearcalc6Changed)
-    Q_PROPERTY(int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
+    Q_PROPERTY(
+        int gearcalcactivation READ gearcalcactivation WRITE setgearcalcactivation NOTIFY gearcalcactivationChanged)
 
     Q_PROPERTY(int ecu READ ecu WRITE setecu NOTIFY ecuChanged)
 
@@ -455,14 +479,14 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal AnalogCalc9 READ AnalogCalc9 WRITE setAnalogCalc9 NOTIFY AnalogCalc9Changed)
     Q_PROPERTY(qreal AnalogCalc10 READ AnalogCalc10 WRITE setAnalogCalc10 NOTIFY AnalogCalc10Changed)
 
-      Q_PROPERTY(qreal EXAnalogCalc0 READ EXAnalogCalc0 WRITE setEXAnalogCalc0 NOTIFY EXAnalogCalc0Changed)
-      Q_PROPERTY(qreal EXAnalogCalc1 READ EXAnalogCalc1 WRITE setEXAnalogCalc1 NOTIFY EXAnalogCalc1Changed)
-      Q_PROPERTY(qreal EXAnalogCalc2 READ EXAnalogCalc2 WRITE setEXAnalogCalc2 NOTIFY EXAnalogCalc2Changed)
-      Q_PROPERTY(qreal EXAnalogCalc3 READ EXAnalogCalc3 WRITE setEXAnalogCalc3 NOTIFY EXAnalogCalc3Changed)
-      Q_PROPERTY(qreal EXAnalogCalc4 READ EXAnalogCalc4 WRITE setEXAnalogCalc4 NOTIFY EXAnalogCalc4Changed)
-      Q_PROPERTY(qreal EXAnalogCalc5 READ EXAnalogCalc5 WRITE setEXAnalogCalc5 NOTIFY EXAnalogCalc5Changed)
-      Q_PROPERTY(qreal EXAnalogCalc6 READ EXAnalogCalc6 WRITE setEXAnalogCalc6 NOTIFY EXAnalogCalc6Changed)
-      Q_PROPERTY(qreal EXAnalogCalc7 READ EXAnalogCalc7 WRITE setEXAnalogCalc7 NOTIFY EXAnalogCalc7Changed)
+    Q_PROPERTY(qreal EXAnalogCalc0 READ EXAnalogCalc0 WRITE setEXAnalogCalc0 NOTIFY EXAnalogCalc0Changed)
+    Q_PROPERTY(qreal EXAnalogCalc1 READ EXAnalogCalc1 WRITE setEXAnalogCalc1 NOTIFY EXAnalogCalc1Changed)
+    Q_PROPERTY(qreal EXAnalogCalc2 READ EXAnalogCalc2 WRITE setEXAnalogCalc2 NOTIFY EXAnalogCalc2Changed)
+    Q_PROPERTY(qreal EXAnalogCalc3 READ EXAnalogCalc3 WRITE setEXAnalogCalc3 NOTIFY EXAnalogCalc3Changed)
+    Q_PROPERTY(qreal EXAnalogCalc4 READ EXAnalogCalc4 WRITE setEXAnalogCalc4 NOTIFY EXAnalogCalc4Changed)
+    Q_PROPERTY(qreal EXAnalogCalc5 READ EXAnalogCalc5 WRITE setEXAnalogCalc5 NOTIFY EXAnalogCalc5Changed)
+    Q_PROPERTY(qreal EXAnalogCalc6 READ EXAnalogCalc6 WRITE setEXAnalogCalc6 NOTIFY EXAnalogCalc6Changed)
+    Q_PROPERTY(qreal EXAnalogCalc7 READ EXAnalogCalc7 WRITE setEXAnalogCalc7 NOTIFY EXAnalogCalc7Changed)
     Q_PROPERTY(qreal Lambdamultiply READ Lambdamultiply WRITE setLambdamultiply NOTIFY LambdamultiplyChanged)
     Q_PROPERTY(qreal Userchannel1 READ Userchannel1 WRITE setUserchannel1 NOTIFY Userchannel1Changed)
     Q_PROPERTY(qreal Userchannel2 READ Userchannel2 WRITE setUserchannel2 NOTIFY Userchannel2Changed)
@@ -477,14 +501,15 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Userchannel11 READ Userchannel11 WRITE setUserchannel11 NOTIFY Userchannel11Changed)
     Q_PROPERTY(qreal Userchannel12 READ Userchannel12 WRITE setUserchannel12 NOTIFY Userchannel12Changed)
 
-    //First attempt Megasquirt Advanced
+    // First attempt Megasquirt Advanced
     Q_PROPERTY(qreal pwseq1 READ pwseq1 WRITE setpwseq1 NOTIFY pwseq1Changed)
     Q_PROPERTY(qreal pwseq2 READ pwseq2 WRITE setpwseq2 NOTIFY pwseq2Changed)
     Q_PROPERTY(qreal pwseq3 READ pwseq3 WRITE setpwseq3 NOTIFY pwseq3Changed)
     Q_PROPERTY(qreal pwseq4 READ pwseq4 WRITE setpwseq4 NOTIFY pwseq4Changed)
     Q_PROPERTY(qreal nitrous1_duty READ nitrous1_duty WRITE setnitrous1_duty NOTIFY nitrous1_dutyChanged)
     Q_PROPERTY(qreal nitrous2_duty READ nitrous2_duty WRITE setnitrous2_duty NOTIFY nitrous2_dutyChanged)
-    Q_PROPERTY(qreal nitrous_timer_out READ nitrous_timer_out WRITE setnitrous_timer_out NOTIFY nitrous_timer_outChanged)
+    Q_PROPERTY(
+        qreal nitrous_timer_out READ nitrous_timer_out WRITE setnitrous_timer_out NOTIFY nitrous_timer_outChanged)
     Q_PROPERTY(qreal n2o_addfuel READ n2o_addfuel WRITE setn2o_addfuel NOTIFY n2o_addfuelChanged)
     Q_PROPERTY(qreal n2o_retard READ n2o_retard WRITE setn2o_retard NOTIFY n2o_retardChanged)
     Q_PROPERTY(qreal EGOcor1 READ EGOcor1 WRITE setEGOcor1 NOTIFY EGOcor1Changed)
@@ -497,13 +522,9 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal Knock_cyl4 READ Knock_cyl4 WRITE setKnock_cyl4 NOTIFY Knock_cyl4Changed)
 
 
-
-
-
-
-
     Q_PROPERTY(qreal FuelLevel READ FuelLevel WRITE setFuelLevel NOTIFY FuelLevelChanged)
-    Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
+    Q_PROPERTY(
+        qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
     Q_PROPERTY(int Brightness READ Brightness WRITE setBrightness NOTIFY BrightnessChanged)
     Q_PROPERTY(int Visibledashes READ Visibledashes WRITE setVisibledashes NOTIFY VisibledashesChanged)
     Q_PROPERTY(int oilpressurelamp READ oilpressurelamp WRITE setoilpressurelamp NOTIFY oilpressurelampChanged)
@@ -511,21 +532,27 @@ class DashBoard : public QObject
     Q_PROPERTY(int alternatorfail READ alternatorfail WRITE setalternatorfail NOTIFY alternatorfailChanged)
     Q_PROPERTY(int AuxTemp1 READ AuxTemp1 WRITE setAuxTemp1 NOTIFY AuxTemp1Changed)
 
-    Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
+    Q_PROPERTY(
+        qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
 
     Q_PROPERTY(qreal sixtyfoottime READ sixtyfoottime WRITE setsixtyfoottime NOTIFY sixtyfoottimeChanged)
     Q_PROPERTY(qreal sixtyfootspeed READ sixtyfootspeed WRITE setsixtyfootspeed NOTIFY sixtyfootspeedChanged)
-    Q_PROPERTY(qreal threehundredthirtyfoottime READ threehundredthirtyfoottime WRITE setthreehundredthirtyfoottime NOTIFY threehundredthirtyfoottimeChanged)
-    Q_PROPERTY(qreal threehundredthirtyfootspeed READ threehundredthirtyfootspeed WRITE setthreehundredthirtyfootspeed NOTIFY threehundredthirtyfootspeedChanged)
+    Q_PROPERTY(qreal threehundredthirtyfoottime READ threehundredthirtyfoottime WRITE setthreehundredthirtyfoottime
+                   NOTIFY threehundredthirtyfoottimeChanged)
+    Q_PROPERTY(qreal threehundredthirtyfootspeed READ threehundredthirtyfootspeed WRITE setthreehundredthirtyfootspeed
+                   NOTIFY threehundredthirtyfootspeedChanged)
     Q_PROPERTY(qreal eightmiletime READ eightmiletime WRITE seteightmiletime NOTIFY eightmiletimeChanged)
     Q_PROPERTY(qreal eightmilespeed READ eightmilespeed WRITE seteightmilespeed NOTIFY eightmilespeedChanged)
     Q_PROPERTY(qreal quartermiletime READ quartermiletime WRITE setquartermiletime NOTIFY quartermiletimeChanged)
     Q_PROPERTY(qreal quartermilespeed READ quartermilespeed WRITE setquartermilespeed NOTIFY quartermilespeedChanged)
     Q_PROPERTY(qreal thousandfoottime READ thousandfoottime WRITE setthousandfoottime NOTIFY thousandfoottimeChanged)
-    Q_PROPERTY(qreal thousandfootspeed READ thousandfootspeed WRITE setthousandfootspeed NOTIFY thousandfootspeedChanged)
+    Q_PROPERTY(
+        qreal thousandfootspeed READ thousandfootspeed WRITE setthousandfootspeed NOTIFY thousandfootspeedChanged)
     Q_PROPERTY(qreal zerotohundredt READ zerotohundredt WRITE setzerotohundredt NOTIFY zerotohundredtChanged)
-    Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY hundredtotwohundredtimeChanged)
-    Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
+    Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY
+                   hundredtotwohundredtimeChanged)
+    Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE
+                   settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
     Q_PROPERTY(qreal reactiontime READ reactiontime WRITE setreactiontime NOTIFY reactiontimeChanged)
     Q_PROPERTY(qreal IGBTPhaseATemp READ IGBTPhaseATemp WRITE setIGBTPhaseATemp NOTIFY IGBTPhaseATempChanged)
     Q_PROPERTY(qreal IGBTPhaseBTemp READ IGBTPhaseBTemp WRITE setIGBTPhaseBTemp NOTIFY IGBTPhaseBTempChanged)
@@ -537,20 +564,26 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal RtdTemp3 READ RtdTemp3 WRITE setRtdTemp3 NOTIFY RtdTemp3Changed)
     Q_PROPERTY(qreal RtdTemp4 READ RtdTemp4 WRITE setRtdTemp4 NOTIFY RtdTemp4Changed)
     Q_PROPERTY(qreal RtdTemp5 READ RtdTemp5 WRITE setRtdTemp5 NOTIFY RtdTemp5Changed)
-    Q_PROPERTY(qreal EMotorTemperature READ EMotorTemperature WRITE setEMotorTemperature NOTIFY EMotorTemperatureChanged)
+    Q_PROPERTY(
+        qreal EMotorTemperature READ EMotorTemperature WRITE setEMotorTemperature NOTIFY EMotorTemperatureChanged)
     Q_PROPERTY(qreal TorqueShudder READ TorqueShudder WRITE setTorqueShudder NOTIFY TorqueShudderChanged)
-    Q_PROPERTY(qreal DigInput1FowardSw READ DigInput1FowardSw WRITE setDigInput1FowardSw NOTIFY DigInput1FowardSwChanged)
-    Q_PROPERTY(qreal DigInput2ReverseSw READ DigInput2ReverseSw WRITE setDigInput2ReverseSw NOTIFY DigInput2ReverseSwChanged)
+    Q_PROPERTY(
+        qreal DigInput1FowardSw READ DigInput1FowardSw WRITE setDigInput1FowardSw NOTIFY DigInput1FowardSwChanged)
+    Q_PROPERTY(
+        qreal DigInput2ReverseSw READ DigInput2ReverseSw WRITE setDigInput2ReverseSw NOTIFY DigInput2ReverseSwChanged)
     Q_PROPERTY(qreal DigInput3BrakeSw READ DigInput3BrakeSw WRITE setDigInput3BrakeSw NOTIFY DigInput3BrakeSwChanged)
-    Q_PROPERTY(qreal DigInput4RegenDisableSw READ DigInput4RegenDisableSw WRITE setDigInput4RegenDisableSw NOTIFY DigInput4RegenDisableSwChanged)
+    Q_PROPERTY(qreal DigInput4RegenDisableSw READ DigInput4RegenDisableSw WRITE setDigInput4RegenDisableSw NOTIFY
+                   DigInput4RegenDisableSwChanged)
     Q_PROPERTY(qreal DigInput5IgnSw READ DigInput5IgnSw WRITE setDigInput5IgnSw NOTIFY DigInput5IgnSwChanged)
     Q_PROPERTY(qreal DigInput6StartSw READ DigInput6StartSw WRITE setDigInput6StartSw NOTIFY DigInput6StartSwChanged)
     Q_PROPERTY(qreal DigInput7Bool READ DigInput7Bool WRITE setDigInput7Bool NOTIFY DigInput7BoolChanged)
     Q_PROPERTY(qreal DigInput8Bool READ DigInput8Bool WRITE setDigInput8Bool NOTIFY DigInput8BoolChanged)
     Q_PROPERTY(qreal EMotorAngle READ EMotorAngle WRITE setEMotorAngle NOTIFY EMotorAngleChanged)
     Q_PROPERTY(qreal EMotorSpeed READ EMotorSpeed WRITE setEMotorSpeed NOTIFY EMotorSpeedChanged)
-    Q_PROPERTY(qreal ElectricalOutFreq READ ElectricalOutFreq WRITE setElectricalOutFreq NOTIFY ElectricalOutFreqChanged)
-    Q_PROPERTY(qreal DeltaResolverFiltered READ DeltaResolverFiltered WRITE setDeltaResolverFiltered NOTIFY DeltaResolverFilteredChanged)
+    Q_PROPERTY(
+        qreal ElectricalOutFreq READ ElectricalOutFreq WRITE setElectricalOutFreq NOTIFY ElectricalOutFreqChanged)
+    Q_PROPERTY(qreal DeltaResolverFiltered READ DeltaResolverFiltered WRITE setDeltaResolverFiltered NOTIFY
+                   DeltaResolverFilteredChanged)
     Q_PROPERTY(qreal PhaseACurrent READ PhaseACurrent WRITE setPhaseACurrent NOTIFY PhaseACurrentChanged)
     Q_PROPERTY(qreal PhaseBCurrent READ PhaseBCurrent WRITE setPhaseBCurrent NOTIFY PhaseBCurrentChanged)
     Q_PROPERTY(qreal PhaseCCurrent READ PhaseCCurrent WRITE setPhaseCCurrent NOTIFY PhaseCCurrentChanged)
@@ -579,7 +612,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal DigitalInput7 READ DigitalInput7 WRITE setDigitalInput7 NOTIFY DigitalInput7Changed)
 
 
-    //EXBoard
+    // EXBoard
     Q_PROPERTY(qreal EXDigitalInput1 READ EXDigitalInput1 WRITE setEXDigitalInput1 NOTIFY EXDigitalInput1Changed)
     Q_PROPERTY(qreal EXDigitalInput2 READ EXDigitalInput2 WRITE setEXDigitalInput2 NOTIFY EXDigitalInput2Changed)
     Q_PROPERTY(qreal EXDigitalInput3 READ EXDigitalInput3 WRITE setEXDigitalInput3 NOTIFY EXDigitalInput3Changed)
@@ -603,7 +636,8 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal undrivenavgspeed READ undrivenavgspeed WRITE setundrivenavgspeed NOTIFY undrivenavgspeedChanged)
     Q_PROPERTY(qreal drivenavgspeed READ drivenavgspeed WRITE setdrivenavgspeed NOTIFY drivenavgspeedChanged)
     Q_PROPERTY(qreal dsettargetslip READ dsettargetslip WRITE setdsettargetslip NOTIFY dsettargetslipChanged)
-    Q_PROPERTY(qreal tractionctlpowerlimit READ tractionctlpowerlimit WRITE settractionctlpowerlimit NOTIFY tractionctlpowerlimitChanged)
+    Q_PROPERTY(qreal tractionctlpowerlimit READ tractionctlpowerlimit WRITE settractionctlpowerlimit NOTIFY
+                   tractionctlpowerlimitChanged)
     Q_PROPERTY(qreal knockallpeak READ knockallpeak WRITE setknockallpeak NOTIFY knockallpeakChanged)
     Q_PROPERTY(qreal knockcorr READ knockcorr WRITE setknockcorr NOTIFY knockcorrChanged)
     Q_PROPERTY(qreal knocklastcyl READ knocklastcyl WRITE setknocklastcyl NOTIFY knocklastcylChanged)
@@ -654,30 +688,33 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal RR_Tyre_Temp_06 READ RR_Tyre_Temp_06 WRITE setRR_Tyre_Temp_06 NOTIFY RR_Tyre_Temp_06Changed)
     Q_PROPERTY(qreal RR_Tyre_Temp_07 READ RR_Tyre_Temp_07 WRITE setRR_Tyre_Temp_07 NOTIFY RR_Tyre_Temp_07Changed)
     Q_PROPERTY(qreal RR_Tyre_Temp_08 READ RR_Tyre_Temp_08 WRITE setRR_Tyre_Temp_08 NOTIFY RR_Tyre_Temp_08Changed)
-    Q_PROPERTY(qreal RPMFrequencyDividerDi1 READ RPMFrequencyDividerDi1 WRITE setRPMFrequencyDividerDi1 NOTIFY RPMFrequencyDividerDi1Changed)
+    Q_PROPERTY(qreal RPMFrequencyDividerDi1 READ RPMFrequencyDividerDi1 WRITE setRPMFrequencyDividerDi1 NOTIFY
+                   RPMFrequencyDividerDi1Changed)
     Q_PROPERTY(int DI1RPMEnabled READ DI1RPMEnabled WRITE setDI1RPMEnabled NOTIFY DI1RPMEnabledChanged)
     Q_PROPERTY(int Externalrpm READ Externalrpm WRITE setExternalrpm NOTIFY ExternalrpmChanged)
     Q_PROPERTY(int language READ language WRITE setlanguage NOTIFY languageChanged)
-    Q_PROPERTY(int externalspeedconnectionrequest READ externalspeedconnectionrequest WRITE setexternalspeedconnectionrequest NOTIFY externalspeedconnectionrequestChanged)
-    Q_PROPERTY(QString externalspeedport READ externalspeedport WRITE setexternalspeedport NOTIFY externalspeedportChanged)
+    Q_PROPERTY(int externalspeedconnectionrequest READ externalspeedconnectionrequest WRITE
+                   setexternalspeedconnectionrequest NOTIFY externalspeedconnectionrequestChanged)
+    Q_PROPERTY(
+        QString externalspeedport READ externalspeedport WRITE setexternalspeedport NOTIFY externalspeedportChanged)
 
-    //Q_PROPERTY(int Seconds_ECU_ON READ Seconds_ECU_ON WRITE setSeconds_ECU_ON NOTIFY Seconds_ECU_ONChanged FINAL)
+    // Q_PROPERTY(int Seconds_ECU_ON READ Seconds_ECU_ON WRITE setSeconds_ECU_ON NOTIFY Seconds_ECU_ONChanged FINAL)
 
-    public:
-    DashBoard(QObject *parent = 0);
+public:
+    DashBoard(QObject *parent = nullptr);
 
     // * Sub-model accessors (TODO-001: DashBoard God Object refactoring)
-    EngineData* engine() const { return m_engine; }
-    VehicleData* vehicle() const { return m_vehicle; }
-    GPSData* gps() const { return m_gps; }
-    AnalogInputs* analog() const { return m_analog; }
-    DigitalInputs* digital() const { return m_digital; }
-    ExpanderBoardData* expander() const { return m_expander; }
-    ElectricMotorData* emotor() const { return m_emotor; }
-    FlagsData* flags() const { return m_flags; }
-    TimingData* timing() const { return m_timing; }
+    EngineData *engine() const { return m_engine; }
+    VehicleData *vehicle() const { return m_vehicle; }
+    GPSData *gps() const { return m_gps; }
+    AnalogInputs *analog() const { return m_analog; }
+    DigitalInputs *digital() const { return m_digital; }
+    ExpanderBoardData *expander() const { return m_expander; }
+    ElectricMotorData *emotor() const { return m_emotor; }
+    FlagsData *flags() const { return m_flags; }
+    TimingData *timing() const { return m_timing; }
 
-    //Steinhart Hart
+    // Steinhart Hart
     long R01 = 2000;
     long R02 = 4000;
     long R03 = 7000;
@@ -746,14 +783,36 @@ class DashBoard : public QObject
     // Odometer
     void setOdo(const qreal &Odo);
     void setCylinders(const qreal &Cylinders);
-    //Tripmeter
+    // Tripmeter
     Q_INVOKABLE void setTrip(const qreal &Trip);
-    Q_INVOKABLE void setAnalogVal(const qreal &A00,const qreal &A05,const qreal &A10,const qreal &A15,const qreal &A20,const qreal &A25,const qreal &A30,const qreal &A35,const qreal &A40,const qreal &A45,const qreal &A50,const qreal &A55,const qreal &A60,const qreal &A65,const qreal &A70,const qreal &A75,const qreal &A80,const qreal &A85,const qreal &A90,const qreal &A95,const qreal &A100,const qreal &A105);
-    Q_INVOKABLE void setEXAnalogVal(const qreal &EXA00,const qreal &EXA05,const qreal &EXA10,const qreal &EXA15,const qreal &EXA20,const qreal &EXA25,const qreal &EXA30,const qreal &EXA35,const qreal &EXA40,const qreal &EXA45,const qreal &EXA50,const qreal &EXA55,const qreal &EXA60,const qreal &EXA65,const qreal &EXA70,const qreal &EXA75, const int &steinhartcalc0on, const int &steinhartcalc1on, const int &steinhartcalc2on, const int &steinhartcalc3on, const int &steinhartcalc4on, const int &steinhartcalc5on,const int &AN0R3VAL,const int &AN0R4VAL,const int &AN1R3VAL,const int &AN1R4VAL,const int &AN2R3VAL,const int &AN2R4VAL,const int &AN3R3VAL,const int &AN3R4VAL,const int &AN4R3VAL,const int &AN4R4VAL,const int &AN5R3VAL,const int &AN5R4VAL);
-    Q_INVOKABLE void setSteinhartcalc(const qreal &T01,const qreal &T02,const qreal &T03,const qreal &R01,const qreal &R02,const qreal &R03,const qreal &T11,const qreal &T12,const qreal &T13,const qreal &R11,const qreal &R12,const qreal &R13,const qreal &T21,const qreal &T22,const qreal &T23,const qreal &R21,const qreal &R22,const qreal &R23,const qreal &T31,const qreal &T32,const qreal &T33,const qreal &R31,const qreal &R32,const qreal &R33,const qreal &T41,const qreal &T42,const qreal &T43,const qreal &R41,const qreal &R42,const qreal &R43,const qreal &T51,const qreal &T52,const qreal &T53,const qreal &R51,const qreal &R52,const qreal &R53);
+    Q_INVOKABLE void setAnalogVal(const qreal &A00, const qreal &A05, const qreal &A10, const qreal &A15,
+                                  const qreal &A20, const qreal &A25, const qreal &A30, const qreal &A35,
+                                  const qreal &A40, const qreal &A45, const qreal &A50, const qreal &A55,
+                                  const qreal &A60, const qreal &A65, const qreal &A70, const qreal &A75,
+                                  const qreal &A80, const qreal &A85, const qreal &A90, const qreal &A95,
+                                  const qreal &A100, const qreal &A105);
+    Q_INVOKABLE void setEXAnalogVal(const qreal &EXA00, const qreal &EXA05, const qreal &EXA10, const qreal &EXA15,
+                                    const qreal &EXA20, const qreal &EXA25, const qreal &EXA30, const qreal &EXA35,
+                                    const qreal &EXA40, const qreal &EXA45, const qreal &EXA50, const qreal &EXA55,
+                                    const qreal &EXA60, const qreal &EXA65, const qreal &EXA70, const qreal &EXA75,
+                                    const int &steinhartcalc0on, const int &steinhartcalc1on,
+                                    const int &steinhartcalc2on, const int &steinhartcalc3on,
+                                    const int &steinhartcalc4on, const int &steinhartcalc5on, const int &AN0R3VAL,
+                                    const int &AN0R4VAL, const int &AN1R3VAL, const int &AN1R4VAL, const int &AN2R3VAL,
+                                    const int &AN2R4VAL, const int &AN3R3VAL, const int &AN3R4VAL, const int &AN4R3VAL,
+                                    const int &AN4R4VAL, const int &AN5R3VAL, const int &AN5R4VAL);
+    Q_INVOKABLE void setSteinhartcalc(const qreal &T01, const qreal &T02, const qreal &T03, const qreal &R01,
+                                      const qreal &R02, const qreal &R03, const qreal &T11, const qreal &T12,
+                                      const qreal &T13, const qreal &R11, const qreal &R12, const qreal &R13,
+                                      const qreal &T21, const qreal &T22, const qreal &T23, const qreal &R21,
+                                      const qreal &R22, const qreal &R23, const qreal &T31, const qreal &T32,
+                                      const qreal &T33, const qreal &R31, const qreal &R32, const qreal &R33,
+                                      const qreal &T41, const qreal &T42, const qreal &T43, const qreal &R41,
+                                      const qreal &R42, const qreal &R43, const qreal &T51, const qreal &T52,
+                                      const qreal &T53, const qreal &R51, const qreal &R52, const qreal &R53);
     Q_INVOKABLE void setNMEAlog(const int &NMEAlog);
 
-     // Advanced Info
+    // Advanced Info
     void setrpm(const qreal &rpm);
     void setIntakepress(const qreal &Intakepress);
     void setPressureV(const qreal &PressureV);
@@ -772,7 +831,7 @@ class DashBoard : public QObject
     void setBatteryV(const qreal &BatteryV);
     void setSerialSpeed(const qreal &speed);
     void setSpeed(const qreal &speed);
-    void setIscvduty (const qreal &Iscvduty );
+    void setIscvduty(const qreal &Iscvduty);
     void setO2volt(const qreal &O2volt);
     void setCyl1_O2_Corr(const qreal &Cyl1_O2_Corr);
     void setCyl2_O2_Corr(const qreal &Cyl2_O2_Corr);
@@ -803,17 +862,16 @@ class DashBoard : public QObject
     void setO2volt_2(const qreal &O2volt_2);
 
 
-
-    //Boost
+    // Boost
 
     void setpim(const qreal &pim);
 
-    //Aux Differential inputs
+    // Aux Differential inputs
     void setauxcalc1(const qreal &auxcalc1);
     void setauxcalc2(const qreal &auxcalc2);
     void setauxcalc3(const qreal &auxcalc3);
     void setauxcalc4(const qreal &auxcalc4);
-    //Sensor Info
+    // Sensor Info
 
     void setsens1(const qreal &sens1);
     void setsens2(const qreal &sens2);
@@ -824,7 +882,7 @@ class DashBoard : public QObject
     void setsens7(const qreal &sens7);
     void setsens8(const qreal &sens8);
 
-    //Flags
+    // Flags
 
     void setFlag1(const qreal &Flag1);
     void setFlag2(const qreal &Flag2);
@@ -852,7 +910,7 @@ class DashBoard : public QObject
     void setFlag24(const qreal &Flag24);
     void setFlag25(const qreal &Flag25);
 
-    //Flag Strings
+    // Flag Strings
 
     void setFlagString1(const QString &FlagString1);
     void setFlagString2(const QString &FlagString2);
@@ -871,7 +929,7 @@ class DashBoard : public QObject
     void setFlagString15(const QString &FlagString15);
     void setFlagString16(const QString &FlagString16);
 
-    //Sensor Strings
+    // Sensor Strings
 
     void setSensorString1(const QString &SensorString1);
     void setSensorString2(const QString &SensorString2);
@@ -882,7 +940,7 @@ class DashBoard : public QObject
     void setSensorString7(const QString &SensorString7);
     void setSensorString8(const QString &SensorString8);
 
-    //Platform String
+    // Platform String
 
 
     void setPlatform(const QString &Platform);
@@ -915,11 +973,7 @@ class DashBoard : public QObject
     void setpressureunits(const QString &pressureunits);
 
 
-
-
-
-
-    //Adaptronic extra
+    // Adaptronic extra
 
     void setMAP(const qreal &MAP);
     void setPANVAC(const qreal &PANVAC);
@@ -969,7 +1023,7 @@ class DashBoard : public QObject
     void setFuelPress(const qreal &FuelPress);
     void setGearOilPress(const qreal &GearOilPress);
 
-    //qsensors
+    // qsensors
     void setaccelx(const qreal &accelx);
     void setaccely(const qreal &accely);
     void setaccelz(const qreal &accelz);
@@ -991,10 +1045,10 @@ class DashBoard : public QObject
     void setAccelTimer(const qreal &AccelTimer);
     void setWeight(const qreal &Weight);
 
-    //Official Pi screen present screen
+    // Official Pi screen present screen
     void setscreen(const bool &screen);
 
-    //User Dashboard Stringlist dashsetup
+    // User Dashboard Stringlist dashsetup
 
     void setmaindashsetup(const QStringList &maindashsetup);
     void setdashsetup3(const QStringList &dashsetup3);
@@ -1003,7 +1057,6 @@ class DashBoard : public QObject
 
     void setdashfiles(const QStringList &dashfiles);
     void setbackroundpictures(const QStringList &backroundpictures);
-
 
 
     void setaccelpedpos(const qreal &accelpedpos);
@@ -1138,17 +1191,17 @@ class DashBoard : public QObject
     Q_INVOKABLE void setgearcalc5(const int &gearcalc5);
     Q_INVOKABLE void setgearcalc6(const int &gearcalc6);
 
-   Q_INVOKABLE void setgearcalcactivation(const int &gearcalcactivation);
+    Q_INVOKABLE void setgearcalcactivation(const int &gearcalcactivation);
 
-    //laptimer
+    // laptimer
     void setcurrentLap(const int &currentLap);
     void setlaptime(const QString &laptime);
     void setLastlaptime(const QString &Lastlaptime);
     void setbestlaptime(const QString &bestlaptime);
 
     Q_INVOKABLE void setdraggable(const int &draggable);
-    void setwifi(const QStringList&wifi);
-    void setcan(const QStringList&can);
+    void setwifi(const QStringList &wifi);
+    void setcan(const QStringList &can);
 
     void setAnalog0(const qreal &Analog0);
     void setAnalog1(const qreal &Analog1);
@@ -1272,7 +1325,7 @@ class DashBoard : public QObject
     void setDigitalInput6(const qreal &DigitalInput6);
     void setDigitalInput7(const qreal &DigitalInput7);
 
-    //EX Board
+    // EX Board
     void setEXDigitalInput1(const qreal &EXDigitalInput1);
     void setEXDigitalInput2(const qreal &EXDigitalInput2);
     void setEXDigitalInput3(const qreal &EXDigitalInput3);
@@ -1353,7 +1406,7 @@ class DashBoard : public QObject
     void setexternalspeedconnectionrequest(const int &externalspeedconnectionrequest);
     void setexternalspeedport(const QString &externalspeedport);
 
-    //Megasquirt Advanced
+    // Megasquirt Advanced
     void setpwseq1(const qreal &pwseq1);
     void setpwseq2(const qreal &pwseq2);
     void setpwseq3(const qreal &pwseq3);
@@ -1373,13 +1426,10 @@ class DashBoard : public QObject
     void setKnock_cyl4(const qreal &Knock_cyl4);
 
 
-
-
-
     qreal Odo() const;
     qreal Cylinders() const;
 
-    //Tripmeter
+    // Tripmeter
 
     qreal Trip() const;
     int NMEAlog() const;
@@ -1430,17 +1480,17 @@ class DashBoard : public QObject
     qreal MAFactivity() const;
     qreal O2volt_2() const;
 
-    //Boost
+    // Boost
     qreal pim() const;
 
 
-    //Aux Differential
+    // Aux Differential
     qreal auxcalc1() const;
     qreal auxcalc2() const;
     qreal auxcalc3() const;
     qreal auxcalc4() const;
 
-    //Sensor Voltages
+    // Sensor Voltages
 
     qreal sens1() const;
     qreal sens2() const;
@@ -1452,7 +1502,7 @@ class DashBoard : public QObject
     qreal sens8() const;
 
 
-    //Flags
+    // Flags
 
     qreal Flag1() const;
     qreal Flag2() const;
@@ -1499,7 +1549,7 @@ class DashBoard : public QObject
     QString FlagString15() const;
     QString FlagString16() const;
 
-    //Sensor Strings
+    // Sensor Strings
 
     QString SensorString1() const;
     QString SensorString2() const;
@@ -1510,7 +1560,7 @@ class DashBoard : public QObject
     QString SensorString7() const;
     QString SensorString8() const;
 
-    //Platform String
+    // Platform String
 
     QString Platform() const;
 
@@ -1536,14 +1586,13 @@ class DashBoard : public QObject
     qreal gpsbearing() const;
     qreal gpsHDOP() const;
 
-    //units
+    // units
     QString units() const;
-    QString speedunits()const;
+    QString speedunits() const;
     QString pressureunits() const;
 
 
-
-    //Adaptronic extra
+    // Adaptronic extra
 
     qreal MAP() const;
     qreal PANVAC() const;
@@ -1562,7 +1611,7 @@ class DashBoard : public QObject
     qreal LEFTBANKO2CORR() const;
     qreal RIGHTBANKO2CORR() const;
     qreal TRACTIONCTRLOFFSET() const;
-    qreal  DRIVESHAFTOFFSET() const;
+    qreal DRIVESHAFTOFFSET() const;
     qreal TCCOMMAND() const;
     qreal FSLCOMMAND() const;
     qreal FSLINDEX() const;
@@ -1593,7 +1642,7 @@ class DashBoard : public QObject
     qreal FuelPress() const;
     qreal GearOilPress() const;
 
-    //qsensors
+    // qsensors
 
     qreal accelx() const;
     qreal accely() const;
@@ -1605,7 +1654,7 @@ class DashBoard : public QObject
     qreal ambitemp() const;
     qreal ambipress() const;
 
-    //calculations
+    // calculations
     qreal Gear() const;
     qreal Gearoffset() const;
 
@@ -1616,10 +1665,10 @@ class DashBoard : public QObject
     qreal Weight() const;
 
 
-    //Official Pi screen present screen
+    // Official Pi screen present screen
     bool screen() const;
 
-    //User Dashboard Stringlist
+    // User Dashboard Stringlist
     QStringList maindashsetup() const;
     QStringList dashsetup3() const;
     QStringList dashsetup2() const;
@@ -1762,7 +1811,7 @@ class DashBoard : public QObject
 
     int ExternalSpeed() const;
 
-    //laptimer
+    // laptimer
 
     int currentLap() const;
     QString laptime() const;
@@ -1806,201 +1855,201 @@ class DashBoard : public QObject
     qreal EXAnalogCalc6() const;
     qreal EXAnalogCalc7() const;
 
-    qreal Lambdamultiply()const;
-    qreal Userchannel1()const;
-    qreal Userchannel2()const;
-    qreal Userchannel3()const;
-    qreal Userchannel4()const;
-    qreal Userchannel5()const;
-    qreal Userchannel6()const;
-    qreal Userchannel7()const;
-    qreal Userchannel8()const;
-    qreal Userchannel9()const;
-    qreal Userchannel10()const;
-    qreal Userchannel11()const;
-    qreal Userchannel12()const;
+    qreal Lambdamultiply() const;
+    qreal Userchannel1() const;
+    qreal Userchannel2() const;
+    qreal Userchannel3() const;
+    qreal Userchannel4() const;
+    qreal Userchannel5() const;
+    qreal Userchannel6() const;
+    qreal Userchannel7() const;
+    qreal Userchannel8() const;
+    qreal Userchannel9() const;
+    qreal Userchannel10() const;
+    qreal Userchannel11() const;
+    qreal Userchannel12() const;
 
-    qreal FuelLevel()const;
-    qreal SteeringWheelAngle()const;
-    int Brightness()const;
-    int Visibledashes()const;
-    int oilpressurelamp()const;
-    int overtempalarm()const;
-    int alternatorfail()const;
-    int AuxTemp1()const;
+    qreal FuelLevel() const;
+    qreal SteeringWheelAngle() const;
+    int Brightness() const;
+    int Visibledashes() const;
+    int oilpressurelamp() const;
+    int overtempalarm() const;
+    int alternatorfail() const;
+    int AuxTemp1() const;
 
-    qreal sixtyfoottime()const;
-    qreal sixtyfootspeed()const;
-    qreal threehundredthirtyfoottime()const;
-    qreal threehundredthirtyfootspeed()const;
-    qreal eightmiletime()const;
-    qreal eightmilespeed()const;
-    qreal quartermiletime()const;
-    qreal quartermilespeed()const;
-    qreal thousandfoottime()const;
-    qreal thousandfootspeed()const;
-    qreal zerotohundredt()const;
-    qreal hundredtotwohundredtime()const;
-    qreal twohundredtothreehundredtime()const;
-    qreal reactiontime()const;
+    qreal sixtyfoottime() const;
+    qreal sixtyfootspeed() const;
+    qreal threehundredthirtyfoottime() const;
+    qreal threehundredthirtyfootspeed() const;
+    qreal eightmiletime() const;
+    qreal eightmilespeed() const;
+    qreal quartermiletime() const;
+    qreal quartermilespeed() const;
+    qreal thousandfoottime() const;
+    qreal thousandfootspeed() const;
+    qreal zerotohundredt() const;
+    qreal hundredtotwohundredtime() const;
+    qreal twohundredtothreehundredtime() const;
+    qreal reactiontime() const;
 
 
-    qreal IGBTPhaseATemp()const;
-    qreal IGBTPhaseBTemp()const;
-    qreal IGBTPhaseCTemp()const;
-    qreal GateDriverTemp()const;
-    qreal ControlBoardTemp()const;
-    qreal RtdTemp1()const;
-    qreal RtdTemp2()const;
-    qreal RtdTemp3()const;
-    qreal RtdTemp4()const;
-    qreal RtdTemp5()const;
-    qreal EMotorTemperature()const;
-    qreal TorqueShudder()const;
-    qreal DigInput1FowardSw()const;
-    qreal DigInput2ReverseSw()const;
-    qreal DigInput3BrakeSw()const;
-    qreal DigInput4RegenDisableSw()const;
-    qreal DigInput5IgnSw()const;
-    qreal DigInput6StartSw()const;
-    qreal DigInput7Bool()const;
-    qreal DigInput8Bool()const;
-    qreal EMotorAngle()const;
-    qreal EMotorSpeed()const;
-    qreal ElectricalOutFreq()const;
-    qreal DeltaResolverFiltered()const;
-    qreal PhaseACurrent()const;
-    qreal PhaseBCurrent()const;
-    qreal PhaseCCurrent()const;
-    qreal DCBusCurrent()const;
-    qreal DCBusVoltage()const;
-    qreal OutputVoltage()const;
-    qreal VABvdVoltage()const;
-    qreal VBCvqVoltage()const;
+    qreal IGBTPhaseATemp() const;
+    qreal IGBTPhaseBTemp() const;
+    qreal IGBTPhaseCTemp() const;
+    qreal GateDriverTemp() const;
+    qreal ControlBoardTemp() const;
+    qreal RtdTemp1() const;
+    qreal RtdTemp2() const;
+    qreal RtdTemp3() const;
+    qreal RtdTemp4() const;
+    qreal RtdTemp5() const;
+    qreal EMotorTemperature() const;
+    qreal TorqueShudder() const;
+    qreal DigInput1FowardSw() const;
+    qreal DigInput2ReverseSw() const;
+    qreal DigInput3BrakeSw() const;
+    qreal DigInput4RegenDisableSw() const;
+    qreal DigInput5IgnSw() const;
+    qreal DigInput6StartSw() const;
+    qreal DigInput7Bool() const;
+    qreal DigInput8Bool() const;
+    qreal EMotorAngle() const;
+    qreal EMotorSpeed() const;
+    qreal ElectricalOutFreq() const;
+    qreal DeltaResolverFiltered() const;
+    qreal PhaseACurrent() const;
+    qreal PhaseBCurrent() const;
+    qreal PhaseCCurrent() const;
+    qreal DCBusCurrent() const;
+    qreal DCBusVoltage() const;
+    qreal OutputVoltage() const;
+    qreal VABvdVoltage() const;
+    qreal VBCvqVoltage() const;
 
-    qreal TirepresLF()const;
-    qreal TirepresRF()const;
-    qreal TirepresRR()const;
-    qreal TirepresLR()const;
+    qreal TirepresLF() const;
+    qreal TirepresRF() const;
+    qreal TirepresRR() const;
+    qreal TirepresLR() const;
 
-    qreal TiretempLF()const;
-    qreal TiretempRF()const;
-    qreal TiretempRR()const;
-    qreal TiretempLR()const;
+    qreal TiretempLF() const;
+    qreal TiretempRF() const;
+    qreal TiretempRR() const;
+    qreal TiretempLR() const;
 
-    qreal DigitalInput1()const;
-    qreal DigitalInput2()const;
-    qreal DigitalInput3()const;
-    qreal DigitalInput4()const;
-    qreal DigitalInput5()const;
-    qreal DigitalInput6()const;
-    qreal DigitalInput7()const;
+    qreal DigitalInput1() const;
+    qreal DigitalInput2() const;
+    qreal DigitalInput3() const;
+    qreal DigitalInput4() const;
+    qreal DigitalInput5() const;
+    qreal DigitalInput6() const;
+    qreal DigitalInput7() const;
 
-    //EX Board
-    qreal EXDigitalInput1()const;
-    qreal EXDigitalInput2()const;
-    qreal EXDigitalInput3()const;
-    qreal EXDigitalInput4()const;
-    qreal EXDigitalInput5()const;
-    qreal EXDigitalInput6()const;
-    qreal EXDigitalInput7()const;
-    qreal EXDigitalInput8()const;
+    // EX Board
+    qreal EXDigitalInput1() const;
+    qreal EXDigitalInput2() const;
+    qreal EXDigitalInput3() const;
+    qreal EXDigitalInput4() const;
+    qreal EXDigitalInput5() const;
+    qreal EXDigitalInput6() const;
+    qreal EXDigitalInput7() const;
+    qreal EXDigitalInput8() const;
 
-    qreal EXAnalogInput0()const;
-    qreal EXAnalogInput1()const;
-    qreal EXAnalogInput2()const;
-    qreal EXAnalogInput3()const;
-    qreal EXAnalogInput4()const;
-    qreal EXAnalogInput5()const;
-    qreal EXAnalogInput6()const;
-    qreal EXAnalogInput7()const;
+    qreal EXAnalogInput0() const;
+    qreal EXAnalogInput1() const;
+    qreal EXAnalogInput2() const;
+    qreal EXAnalogInput3() const;
+    qreal EXAnalogInput4() const;
+    qreal EXAnalogInput5() const;
+    qreal EXAnalogInput6() const;
+    qreal EXAnalogInput7() const;
 
-///
-    qreal igncut()const;
-    qreal undrivenavgspeed()const;
-    qreal drivenavgspeed()const;
-    qreal dsettargetslip()const;
-    qreal tractionctlpowerlimit()const;
-    qreal knockallpeak()const;
-    qreal knockcorr()const;
-    qreal knocklastcyl()const;
-    qreal totalfueltrim()const;
-    qreal totaligncomp()const;
-    qreal egthighest()const;
-    qreal cputempecu()const;
-    qreal errorcodecount()const;
-    qreal lostsynccount()const;
-    qreal egtdiff()const;
-    qreal activeboosttable()const;
-    qreal activetunetable()const;
-    qreal genericoutput1()const;
-    qreal frequencyDIEX1()const;
+    ///
+    qreal igncut() const;
+    qreal undrivenavgspeed() const;
+    qreal drivenavgspeed() const;
+    qreal dsettargetslip() const;
+    qreal tractionctlpowerlimit() const;
+    qreal knockallpeak() const;
+    qreal knockcorr() const;
+    qreal knocklastcyl() const;
+    qreal totalfueltrim() const;
+    qreal totaligncomp() const;
+    qreal egthighest() const;
+    qreal cputempecu() const;
+    qreal errorcodecount() const;
+    qreal lostsynccount() const;
+    qreal egtdiff() const;
+    qreal activeboosttable() const;
+    qreal activetunetable() const;
+    qreal genericoutput1() const;
+    qreal frequencyDIEX1() const;
 
-    qreal LF_Tyre_Temp_01()const;
-    qreal LF_Tyre_Temp_02()const;
-    qreal LF_Tyre_Temp_03()const;
-    qreal LF_Tyre_Temp_04()const;
-    qreal LF_Tyre_Temp_05()const;
-    qreal LF_Tyre_Temp_06()const;
-    qreal LF_Tyre_Temp_07()const;
-    qreal LF_Tyre_Temp_08()const;
-    qreal RF_Tyre_Temp_01()const;
-    qreal RF_Tyre_Temp_02()const;
-    qreal RF_Tyre_Temp_03()const;
-    qreal RF_Tyre_Temp_04()const;
-    qreal RF_Tyre_Temp_05()const;
-    qreal RF_Tyre_Temp_06()const;
-    qreal RF_Tyre_Temp_07()const;
-    qreal RF_Tyre_Temp_08()const;
-    qreal LR_Tyre_Temp_01()const;
-    qreal LR_Tyre_Temp_02()const;
-    qreal LR_Tyre_Temp_03()const;
-    qreal LR_Tyre_Temp_04()const;
-    qreal LR_Tyre_Temp_05()const;
-    qreal LR_Tyre_Temp_06()const;
-    qreal LR_Tyre_Temp_07()const;
-    qreal LR_Tyre_Temp_08()const;
-    qreal RR_Tyre_Temp_01()const;
-    qreal RR_Tyre_Temp_02()const;
-    qreal RR_Tyre_Temp_03()const;
-    qreal RR_Tyre_Temp_04()const;
-    qreal RR_Tyre_Temp_05()const;
-    qreal RR_Tyre_Temp_06()const;
-    qreal RR_Tyre_Temp_07()const;
-    qreal RR_Tyre_Temp_08()const;
-    qreal RPMFrequencyDividerDi1()const;
-    int DI1RPMEnabled()const;
-    int Externalrpm()const;
-    int language()const;
-    int externalspeedconnectionrequest()const;
-    QString externalspeedport()const;
+    qreal LF_Tyre_Temp_01() const;
+    qreal LF_Tyre_Temp_02() const;
+    qreal LF_Tyre_Temp_03() const;
+    qreal LF_Tyre_Temp_04() const;
+    qreal LF_Tyre_Temp_05() const;
+    qreal LF_Tyre_Temp_06() const;
+    qreal LF_Tyre_Temp_07() const;
+    qreal LF_Tyre_Temp_08() const;
+    qreal RF_Tyre_Temp_01() const;
+    qreal RF_Tyre_Temp_02() const;
+    qreal RF_Tyre_Temp_03() const;
+    qreal RF_Tyre_Temp_04() const;
+    qreal RF_Tyre_Temp_05() const;
+    qreal RF_Tyre_Temp_06() const;
+    qreal RF_Tyre_Temp_07() const;
+    qreal RF_Tyre_Temp_08() const;
+    qreal LR_Tyre_Temp_01() const;
+    qreal LR_Tyre_Temp_02() const;
+    qreal LR_Tyre_Temp_03() const;
+    qreal LR_Tyre_Temp_04() const;
+    qreal LR_Tyre_Temp_05() const;
+    qreal LR_Tyre_Temp_06() const;
+    qreal LR_Tyre_Temp_07() const;
+    qreal LR_Tyre_Temp_08() const;
+    qreal RR_Tyre_Temp_01() const;
+    qreal RR_Tyre_Temp_02() const;
+    qreal RR_Tyre_Temp_03() const;
+    qreal RR_Tyre_Temp_04() const;
+    qreal RR_Tyre_Temp_05() const;
+    qreal RR_Tyre_Temp_06() const;
+    qreal RR_Tyre_Temp_07() const;
+    qreal RR_Tyre_Temp_08() const;
+    qreal RPMFrequencyDividerDi1() const;
+    int DI1RPMEnabled() const;
+    int Externalrpm() const;
+    int language() const;
+    int externalspeedconnectionrequest() const;
+    QString externalspeedport() const;
 
-    //Megasquirt Advanced
-    qreal pwseq1()const;
-    qreal pwseq2()const;
-    qreal pwseq3()const;
-    qreal pwseq4()const;
-    qreal nitrous1_duty()const;
-    qreal nitrous2_duty()const;
-    qreal nitrous_timer_out()const;
-    qreal n2o_addfuel()const;
-    qreal n2o_retard()const;
-    qreal EGOcor1()const;
-    qreal EGOcor2()const;
-    qreal EGOcor3()const;
-    qreal EGOcor4()const;
-    qreal Knock_cyl1()const;
-    qreal Knock_cyl2()const;
-    qreal Knock_cyl3()const;
-    qreal Knock_cyl4()const;
+    // Megasquirt Advanced
+    qreal pwseq1() const;
+    qreal pwseq2() const;
+    qreal pwseq3() const;
+    qreal pwseq4() const;
+    qreal nitrous1_duty() const;
+    qreal nitrous2_duty() const;
+    qreal nitrous_timer_out() const;
+    qreal n2o_addfuel() const;
+    qreal n2o_retard() const;
+    qreal EGOcor1() const;
+    qreal EGOcor2() const;
+    qreal EGOcor3() const;
+    qreal EGOcor4() const;
+    qreal Knock_cyl1() const;
+    qreal Knock_cyl2() const;
+    qreal Knock_cyl3() const;
+    qreal Knock_cyl4() const;
 
 signals:
 
-    //Odometer
+    // Odometer
     void odoChanged(qreal Odo);
     void CylindersChanged(qreal Cylinders);
 
-    //Tripmeter
+    // Tripmeter
     void tripChanged(qreal Trip);
     void NMEAlogChanged(int NMEAlog);
 
@@ -2053,17 +2102,17 @@ signals:
     void o2volt_2Changed(qreal O2volt_2);
 
 
-    //Boost
+    // Boost
     void pimChanged(qreal pim);
 
-    //Aux Inputs
+    // Aux Inputs
 
     void auxcalc1Changed(qreal auxcalc1);
     void auxcalc2Changed(qreal auxcalc2);
     void auxcalc3Changed(qreal auxcalc3);
     void auxcalc4Changed(qreal auxcalc4);
 
-    //Sensor Voltages
+    // Sensor Voltages
 
     void sens1Changed(qreal sens1);
     void sens2Changed(qreal sens2);
@@ -2075,7 +2124,7 @@ signals:
     void sens8Changed(qreal sens8);
 
 
-    //Flags
+    // Flags
 
     void flag1Changed(qreal Flag1);
     void flag2Changed(qreal Flag2);
@@ -2102,7 +2151,7 @@ signals:
     void flag23Changed(qreal Flag23);
     void flag24Changed(qreal Flag24);
     void flag25Changed(qreal Flag25);
-    //Flag Strings
+    // Flag Strings
 
     void flagString1Changed(QString FlagString1);
     void flagString2Changed(QString FlagString2);
@@ -2121,7 +2170,7 @@ signals:
     void flagString15Changed(QString FlagString15);
     void flagString16Changed(QString FlagString16);
 
-    //Sensor Strings
+    // Sensor Strings
 
     void sensorString1Changed(QString SensorString1);
     void sensorString2Changed(QString SensorString2);
@@ -2132,7 +2181,7 @@ signals:
     void sensorString7Changed(QString SensorString7);
     void sensorString8Changed(QString SensorString8);
 
-    //Platfrom String
+    // Platfrom String
     void platformChanged(QString Platform);
 
     void serialStatChanged(QString SerialStat);
@@ -2163,7 +2212,7 @@ signals:
     void speedunitsChanged(QString speedunits);
     void pressureunitsChanged(QString pressureunits);
 
-    //Adaptronic extra
+    // Adaptronic extra
 
     void mAPChanged(qreal MAP);
     void PANVACChanged(qreal PANVAC);
@@ -2235,11 +2284,11 @@ signals:
     void accelTimerChanged(qreal AccelTimer);
     void weightChanged(qreal Weight);
 
-    //Official Pi screen present screen
+    // Official Pi screen present screen
     void screenChanged(bool screen);
 
 
-    //User Dashboard Stringlist
+    // User Dashboard Stringlist
 
     void maindashsetupChanged(QStringList maindashsetup);
     void dashsetup3Changed(QStringList dashsetup3);
@@ -2339,26 +2388,26 @@ signals:
     void supportedRegChanged(int supportedReg);
     void speedpercentChanged(qreal speedpercent);
     void pulsespermileChanged(qreal pulsespermile);
-    void maxRPMChanged (int maxRPM);
+    void maxRPMChanged(int maxRPM);
     void rpmStage1Changed(int rpmStage1);
     void rpmStage2Changed(int rpmStage2);
     void rpmStage3Changed(int rpmStage3);
     void rpmStage4Changed(int rpmStage4);
-    void waterwarnChanged (int waterwarn);
-    void rpmwarnChanged (int rpmwarn);
-    void knockwarnChanged (int knockwarn);
+    void waterwarnChanged(int waterwarn);
+    void rpmwarnChanged(int rpmwarn);
+    void knockwarnChanged(int knockwarn);
     void boostwarnChanged(qreal boostwarn);
-    void smoothrpmChanged (int smoothrpm);
-    void smoothspeedChanged (int smoothspeed);
-    void smootexAnalogInput7Changed (int smootexAnalogInput7);
+    void smoothrpmChanged(int smoothrpm);
+    void smoothspeedChanged(int smoothspeed);
+    void smootexAnalogInput7Changed(int smootexAnalogInput7);
 
-    void gearcalc1Changed (int gearcalc1);
-    void gearcalc2Changed (int gearcalc2);
-    void gearcalc3Changed (int gearcalc3);
-    void gearcalc4Changed (int gearcalc4);
-    void gearcalc5Changed (int gearcalc5);
-    void gearcalc6Changed (int gearcalc6);
-    void gearcalcactivationChanged (int gearcalcactivation);
+    void gearcalc1Changed(int gearcalc1);
+    void gearcalc2Changed(int gearcalc2);
+    void gearcalc3Changed(int gearcalc3);
+    void gearcalc4Changed(int gearcalc4);
+    void gearcalc5Changed(int gearcalc5);
+    void gearcalc6Changed(int gearcalc6);
+    void gearcalcactivationChanged(int gearcalcactivation);
     void ecuChanged(int ecu);
     void rpmstyle1Changed(int rpmstyle1);
     void rpmstyle2Changed(int rpmstyle2);
@@ -2377,7 +2426,7 @@ signals:
     void ExternalSpeedChanged(int ExternalSpeed);
     void externalspeedport(QString externalspeedport);
 
-    //laptimer
+    // laptimer
 
     void currentLapChanged(int currentLap);
     void laptimeChanged(QString laptime);
@@ -2434,7 +2483,7 @@ signals:
     void Userchannel11Changed(qreal Userchannel11);
     void Userchannel12Changed(qreal Userchannel12);
 
-    //udp 299 300 301
+    // udp 299 300 301
     void BitfieldEngineStatusChanged(qreal BitfieldEngineStatus);
 
     void FuelLevelChanged(qreal FuelLevel);
@@ -2512,7 +2561,7 @@ signals:
     void DigitalInput6Changed(qreal DigitalInput6);
     void DigitalInput7Changed(qreal DigitalInput7);
 
-    //EX Board
+    // EX Board
     void EXDigitalInput1Changed(qreal EXDigitalInput1);
     void EXDigitalInput2Changed(qreal EXDigitalInput2);
     void EXDigitalInput3Changed(qreal EXDigitalInput3);
@@ -2593,7 +2642,7 @@ signals:
     void externalspeedconnectionrequestChanged(int externalspeedconnectionrequest);
     void externalspeedportChanged(QString externalspeedport);
 
-    //Megasquirt Advanced
+    // Megasquirt Advanced
     void pwseq1Changed(qreal pwseq1);
     void pwseq2Changed(qreal pwseq2);
     void pwseq3Changed(qreal pwseq3);
@@ -2671,16 +2720,16 @@ private:
     qreal m_O2volt_2;
 
 
-    //Boost
+    // Boost
     qreal m_pim;
 
-    //Aux Inputs
+    // Aux Inputs
     qreal m_auxcalc1;
     qreal m_auxcalc2;
     qreal m_auxcalc3;
     qreal m_auxcalc4;
 
-    //Sensor Voltage
+    // Sensor Voltage
     qreal m_sens1;
     qreal m_sens2;
     qreal m_sens3;
@@ -2691,10 +2740,7 @@ private:
     qreal m_sens8;
 
 
-
-
-
-    //Flag Strings
+    // Flag Strings
 
     QString m_FlagString1;
     QString m_FlagString2;
@@ -2713,7 +2759,7 @@ private:
     QString m_FlagString15;
     QString m_FlagString16;
 
-    //Sensor strings
+    // Sensor strings
 
 
     QString m_SensorString1;
@@ -2725,7 +2771,7 @@ private:
     QString m_SensorString7;
     QString m_SensorString8;
 
-    //Flags
+    // Flags
 
     qreal m_Flag1;
     qreal m_Flag2;
@@ -2753,7 +2799,7 @@ private:
     qreal m_Flag24;
     qreal m_Flag25;
 
-    //Platform String
+    // Platform String
 
     QString m_Platform;
 
@@ -2767,7 +2813,7 @@ private:
     QString m_CBXCountrysave;
     QString m_CBXTracksave;
 
-    //Adaptronic extra
+    // Adaptronic extra
 
     qreal m_MAP;
     qreal m_PANVAC;
@@ -2831,13 +2877,13 @@ private:
     qreal m_gpsbearing;
     qreal m_gpsHDOP;
 
-    //Units
+    // Units
 
     QString m_units;
     QString m_speedunits;
     QString m_pressureunits;
 
-    //qsensors
+    // qsensors
 
     qreal m_accelx;
     qreal m_accely;
@@ -2849,7 +2895,7 @@ private:
     qreal m_ambitemp;
     qreal m_ambipress;
 
-    //calculations
+    // calculations
 
     qreal m_Gear;
     qreal m_Gearoffset;
@@ -2859,9 +2905,9 @@ private:
     qreal m_AccelTimer;
     qreal m_Weight;
 
-    //Official Pi screen present screen
+    // Official Pi screen present screen
     bool m_screen;
-    //User Dashboard Stringlist  dashsetup
+    // User Dashboard Stringlist  dashsetup
     QStringList m_maindashsetup;
     QStringList m_dashsetup3;
     QStringList m_dashsetup2;
@@ -3001,7 +3047,7 @@ private:
 
     int m_ExternalSpeed;
 
-    //laptimer
+    // laptimer
 
     int m_currentLap;
     QString m_laptime;
@@ -3037,13 +3083,13 @@ private:
     qreal m_AnalogCalc10;
 
     qreal m_EXAnalogCalc0;
-        qreal m_EXAnalogCalc1;
-        qreal m_EXAnalogCalc2;
-        qreal m_EXAnalogCalc3;
-        qreal m_EXAnalogCalc4;
-        qreal m_EXAnalogCalc5;
-        qreal m_EXAnalogCalc6;
-        qreal m_EXAnalogCalc7;
+    qreal m_EXAnalogCalc1;
+    qreal m_EXAnalogCalc2;
+    qreal m_EXAnalogCalc3;
+    qreal m_EXAnalogCalc4;
+    qreal m_EXAnalogCalc5;
+    qreal m_EXAnalogCalc6;
+    qreal m_EXAnalogCalc7;
 
     qreal m_Lambdamultiply;
     qreal m_Userchannel1;
@@ -3059,7 +3105,7 @@ private:
     qreal m_Userchannel11;
     qreal m_Userchannel12;
 
-    //udp 298 Mega squirt Advanced
+    // udp 298 Mega squirt Advanced
     qreal m_BitfieldEngineStatus;
 
     qreal m_FuelLevel;
@@ -3138,7 +3184,7 @@ private:
     qreal m_DigitalInput6;
     qreal m_DigitalInput7;
 
-    //EX Board
+    // EX Board
     qreal m_EXDigitalInput1;
     qreal m_EXDigitalInput2;
     qreal m_EXDigitalInput3;
@@ -3217,7 +3263,7 @@ private:
     int m_externalspeedconnectionrequest;
     QString m_externalspeedport;
 
-    //Megasquirt Advanced
+    // Megasquirt Advanced
     qreal m_pwseq1;
     qreal m_pwseq2;
     qreal m_pwseq3;
@@ -3238,15 +3284,15 @@ private:
 
     // * Sub-model instances (TODO-001: DashBoard God Object refactoring)
     // ! These will hold domain-specific data, eventually replacing flat properties above
-    EngineData* m_engine;
-    VehicleData* m_vehicle;
-    GPSData* m_gps;
-    AnalogInputs* m_analog;
-    DigitalInputs* m_digital;
-    ExpanderBoardData* m_expander;
-    ElectricMotorData* m_emotor;
-    FlagsData* m_flags;
-    TimingData* m_timing;
+    EngineData *m_engine;
+    VehicleData *m_vehicle;
+    GPSData *m_gps;
+    AnalogInputs *m_analog;
+    DigitalInputs *m_digital;
+    ExpanderBoardData *m_expander;
+    ElectricMotorData *m_emotor;
+    FlagsData *m_flags;
+    TimingData *m_timing;
 };
 
-#endif // DASHBOARD_H
+#endif  // DASHBOARD_H

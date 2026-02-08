@@ -122,16 +122,17 @@ SortUsingDeclarations: true
 # These help with Q_OBJECT, signals, slots, etc.
 MacroBlockBegin: ''
 MacroBlockEnd: ''
-StatementMacros:
-  - Q_OBJECT
-  - Q_PROPERTY
+AttributeMacros:
   - Q_INVOKABLE
   - Q_SIGNAL
   - Q_SLOT
-  - Q_SIGNALS
-  - Q_SLOTS
   - Q_EMIT
   - Q_UNUSED
+StatementMacros:
+  - Q_OBJECT
+  - Q_PROPERTY
+  - Q_SIGNALS
+  - Q_SLOTS
   - Q_DECLARE_FLAGS
   - Q_DECLARE_OPERATORS_FOR_FLAGS
   - QT_BEGIN_NAMESPACE

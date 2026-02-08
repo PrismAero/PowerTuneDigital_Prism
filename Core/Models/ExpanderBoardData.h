@@ -1,11 +1,11 @@
 /**
  * @file ExpanderBoardData.h
  * @brief External expansion board data model for PowerTune
- * 
+ *
  * This class encapsulates expansion board sensor data including:
  * - EXAnalogInput0-7 (raw values)
  * - EXAnalogCalc0-7 (calculated values)
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -125,4 +125,4 @@ private:
     qreal m_EXAnalogCalc7 = 0;
 };
 
-#endif // EXPANDERBOARDDATA_H
+#endif  // EXPANDERBOARDDATA_H

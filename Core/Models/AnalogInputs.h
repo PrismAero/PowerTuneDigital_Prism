@@ -1,14 +1,14 @@
 /**
  * @file AnalogInputs.h
  * @brief Analog input sensor data model for PowerTune
- * 
+ *
  * This class encapsulates analog sensor input data including:
  * - Analog0-10 (raw values)
  * - AnalogCalc0-10 (calculated values)
  * - Sens1-8 (legacy sensor inputs)
  * - AuxCalc1-4 (differential aux calculations)
  * - User channels
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -308,4 +308,4 @@ private:
     qreal m_Userchannel12 = 0;
 };
 
-#endif // ANALOGINPUTS_H
+#endif  // ANALOGINPUTS_H

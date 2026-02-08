@@ -20,4 +20,4 @@ public:
     float SteinHart(float R);
 };
 
-#endif // SHCALC_H
+#endif  // SHCALC_H

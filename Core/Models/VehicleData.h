@@ -1,7 +1,7 @@
 /**
  * @file VehicleData.h
  * @brief Vehicle-level data model for PowerTune
- * 
+ *
  * This class encapsulates vehicle-related sensor data including:
  * - Speed, gear, odometer, trip
  * - Wheel speeds (4 corners)
@@ -10,7 +10,7 @@
  * - Steering wheel angle
  * - Tire temps/pressures (4 corners)
  * - Accelerometer/gyroscope data
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -47,7 +47,8 @@ class VehicleData : public QObject
     Q_PROPERTY(qreal wheelspdftleft READ wheelspdftleft WRITE setwheelspdftleft NOTIFY wheelspdftleftChanged)
     Q_PROPERTY(qreal wheelspdftright READ wheelspdftright WRITE setwheelspdftright NOTIFY wheelspdftrightChanged)
     Q_PROPERTY(qreal wheelspdrearleft READ wheelspdrearleft WRITE setwheelspdrearleft NOTIFY wheelspdrearleftChanged)
-    Q_PROPERTY(qreal wheelspdrearright READ wheelspdrearright WRITE setwheelspdrearright NOTIFY wheelspdrearrightChanged)
+    Q_PROPERTY(
+        qreal wheelspdrearright READ wheelspdrearright WRITE setwheelspdrearright NOTIFY wheelspdrearrightChanged)
     Q_PROPERTY(qreal wheeldiff READ wheeldiff WRITE setwheeldiff NOTIFY wheeldiffChanged)
     Q_PROPERTY(qreal wheelslip READ wheelslip WRITE setwheelslip NOTIFY wheelslipChanged)
 
@@ -101,11 +102,13 @@ class VehicleData : public QObject
     Q_PROPERTY(qreal RR_Tyre_Temp_08 READ RR_Tyre_Temp_08 WRITE setRR_Tyre_Temp_08 NOTIFY RR_Tyre_Temp_08Changed)
 
     // * Steering
-    Q_PROPERTY(qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
+    Q_PROPERTY(
+        qreal SteeringWheelAngle READ SteeringWheelAngle WRITE setSteeringWheelAngle NOTIFY SteeringWheelAngleChanged)
 
     // * Controls State
     Q_PROPERTY(qreal accelpedpos READ accelpedpos WRITE setaccelpedpos NOTIFY accelpedposChanged)
-    Q_PROPERTY(qreal clutchswitchstate READ clutchswitchstate WRITE setclutchswitchstate NOTIFY clutchswitchstateChanged)
+    Q_PROPERTY(
+        qreal clutchswitchstate READ clutchswitchstate WRITE setclutchswitchstate NOTIFY clutchswitchstateChanged)
     Q_PROPERTY(qreal handbrake READ handbrake WRITE sethandbrake NOTIFY handbrakeChanged)
 
     // * Lights/Indicators
@@ -588,4 +591,4 @@ private:
     qreal m_Weight = 0;
 };
 
-#endif // VEHICLEDATA_H
+#endif  // VEHICLEDATA_H

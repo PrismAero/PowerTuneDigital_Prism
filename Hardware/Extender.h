@@ -17,10 +17,10 @@
 
 #ifndef Extender_H
 #define Extender_H
-#include <QObject>
 #include <QCanBus>
 #include <QCanBusDevice>
 #include <QCanBusFrame>
+#include <QObject>
 
 
 class DashBoard;
@@ -29,50 +29,49 @@ class Extender : public QObject
 {
     Q_OBJECT
 public:
-
-    explicit Extender(QObject *parent = 0);
-    explicit Extender(DashBoard *dashboard, QObject *parent = 0);
-    ~Extender();
+    explicit Extender(QObject *parent = nullptr);
+    explicit Extender(DashBoard *dashboard, QObject *parent = nullptr);
+    ~Extender() override;
 
 
 public slots:
-    void openCAN(const int &ExtenderBaseID,const int &RPMCANBaseID);
+    void openCAN(const int &ExtenderBaseID, const int &RPMCANBaseID);
     void closeConnection();
     void readyToRead();
 
 private:
-
     QCanBusDevice *m_canDevice;
     QString byteArrayToHex(const QByteArray &byteArray);
     DashBoard *m_dashboard;
     double pkgpayload[8];
-    struct payload{
-       quint16 CH1;
-       quint16 CH2;
-       quint16 CH3;
-       quint16 CH4;
-       payload parse(const QByteArray &);
+    struct payload
+    {
+        quint16 CH1;
+        quint16 CH2;
+        quint16 CH3;
+        quint16 CH4;
+        payload parse(const QByteArray &);
     };
     double pkgpayload1[8];
-    struct payload1{
-       quint8 CH10;
-       quint8 CH11;
-       quint8 CH12;
-       quint8 CH13;
-       quint8 CH14;
-       quint8 CH15;
-       quint8 CH16;
-       quint8 CH17;
-       payload1 parse(const QByteArray &);
+    struct payload1
+    {
+        quint8 CH10;
+        quint8 CH11;
+        quint8 CH12;
+        quint8 CH13;
+        quint8 CH14;
+        quint8 CH15;
+        quint8 CH16;
+        quint8 CH17;
+        payload1 parse(const QByteArray &);
     };
-    int         m_units;
+    int m_units;
 
 
 signals:
 
-void NewCanFrameReceived(int canId, QString payload);
-void Newtestsignal();
-
+    void NewCanFrameReceived(int canId, QString payload);
+    void Newtestsignal();
 };
 
-#endif // Extender_H
+#endif  // Extender_H

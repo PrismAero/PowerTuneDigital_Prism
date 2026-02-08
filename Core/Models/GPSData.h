@@ -1,13 +1,13 @@
 /**
  * @file GPSData.h
  * @brief GPS/Location data model for PowerTune
- * 
+ *
  * This class encapsulates GPS-related sensor data including:
  * - Latitude, longitude, altitude
  * - GPS speed, bearing
  * - Satellite count, HDOP
  * - Fix type, time
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -31,7 +31,8 @@ class GPSData : public QObject
     Q_PROPERTY(qreal gpsbearing READ gpsbearing WRITE setgpsbearing NOTIFY gpsbearingChanged)
 
     // * Quality
-    Q_PROPERTY(int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
+    Q_PROPERTY(
+        int gpsVisibleSatelites READ gpsVisibleSatelites WRITE setgpsVisibleSatelites NOTIFY gpsVisibleSatelitesChanged)
     Q_PROPERTY(qreal gpsHDOP READ gpsHDOP WRITE setgpsHDOP NOTIFY gpsHDOPChanged)
     Q_PROPERTY(QString gpsFIXtype READ gpsFIXtype WRITE setgpsFIXtype NOTIFY gpsFIXtypeChanged)
 
@@ -93,4 +94,4 @@ private:
     qreal m_NMEAlog = 0;
 };
 
-#endif // GPSDATA_H
+#endif  // GPSDATA_H

@@ -1,12 +1,12 @@
 /**
  * @file DigitalInputs.h
  * @brief Digital input data model for PowerTune
- * 
+ *
  * This class encapsulates digital I/O state data including:
  * - DigitalInput1-7 (main board)
  * - EXDigitalInput1-8 (expansion board)
  * - Frequency/RPM divider inputs
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -39,7 +39,8 @@ class DigitalInputs : public QObject
     Q_PROPERTY(qreal EXDigitalInput8 READ EXDigitalInput8 WRITE setEXDigitalInput8 NOTIFY EXDigitalInput8Changed)
 
     // * Frequency/RPM Inputs
-    Q_PROPERTY(qreal RPMFrequencyDividerDi1 READ RPMFrequencyDividerDi1 WRITE setRPMFrequencyDividerDi1 NOTIFY RPMFrequencyDividerDi1Changed)
+    Q_PROPERTY(qreal RPMFrequencyDividerDi1 READ RPMFrequencyDividerDi1 WRITE setRPMFrequencyDividerDi1 NOTIFY
+                   RPMFrequencyDividerDi1Changed)
     Q_PROPERTY(qreal frequencyDIEX1 READ frequencyDIEX1 WRITE setfrequencyDIEX1 NOTIFY frequencyDIEX1Changed)
     Q_PROPERTY(int DI1RPMEnabled READ DI1RPMEnabled WRITE setDI1RPMEnabled NOTIFY DI1RPMEnabledChanged)
 
@@ -146,4 +147,4 @@ private:
     int m_DI1RPMEnabled = 0;
 };
 
-#endif // DIGITALINPUTS_H
+#endif  // DIGITALINPUTS_H

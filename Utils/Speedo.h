@@ -2,10 +2,10 @@
 #ifndef SPEEDO_H
 #define SPEEDO_H
 
-#include <QObject>
-#include <QByteArray>
-
 #include "../Core/serialport.h"
+
+#include <QByteArray>
+#include <QObject>
 
 class DashBoard;
 
@@ -29,4 +29,4 @@ private:
     QByteArray m_readData;
 };
 
-#endif // SPEEDO_H
+#endif  // SPEEDO_H

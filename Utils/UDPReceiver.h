@@ -11,21 +11,19 @@ class udpreceiver : public QObject
     Q_OBJECT
 
 public:
-    explicit udpreceiver(QObject *parent = 0);
-     explicit udpreceiver(DashBoard *dashboard, QObject *parent = 0);
+    explicit udpreceiver(QObject *parent = nullptr);
+    explicit udpreceiver(DashBoard *dashboard, QObject *parent = nullptr);
 
 private:
-     DashBoard *m_dashboard;
-     QUdpSocket *udpSocket = nullptr;
-     int         m_units;
+    DashBoard *m_dashboard;
+    QUdpSocket *udpSocket = nullptr;
+    int m_units;
 public slots:
-     void processPendingDatagrams();
-     void startreceiver();
-     void closeConnection();
+    void processPendingDatagrams();
+    void startreceiver();
+    void closeConnection();
 signals:
-
-
 };
 
 
-#endif // UDPRECEIVER_H
+#endif  // UDPRECEIVER_H

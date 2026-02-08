@@ -1,38 +1,34 @@
 #include "ParseGithubData.h"
+
 #include <QtNetwork>
 
-parsegithubData::parsegithubData()
-{
-
-}
+parsegithubData::parsegithubData() {}
 QString pathString;
 QList<QString> parsegithubData::readTrackData()
 {
-    //qDebug() <<"readTrackData";
-    QList<QPair<QString,QString>> returnData;
+    // qDebug() <<"readTrackData";
+    QList<QPair<QString, QString>> returnData;
 
 
+#ifdef __linux__
+    pathString = ("/opt/PowerTune/repo.txt");  // Opens the embeded KML file/txt
+#elif _WIN32
+    pathString = (QCoreApplication::applicationFilePath().remove("release/PowertuneQMLGui.exe") +
+                  "repo.txt");  // Opens the repo track list
+#else
 
-
-    #ifdef __linux__
-        pathString = ("/opt/PowerTune/repo.txt"); // Opens the embeded KML file/txt
-    #elif _WIN32
-        pathString = (QCoreApplication::applicationFilePath().remove("release/PowertuneQMLGui.exe") + "repo.txt"); // Opens the repo track list
-    #else
-
-    #endif
+#endif
 
 
     QFile inputFile(pathString);
-    //qDebug()<< inputFile.fileName();
-    if (inputFile.open(QIODevice::ReadOnly))
-    {
+    // qDebug()<< inputFile.fileName();
+    if (inputFile.open(QIODevice::ReadOnly)) {
         QTextStream in(&inputFile);
-        while (!in.atEnd()) // Reads line and puts it in a string + Debug output of the string
+        while (!in.atEnd())  // Reads line and puts it in a string + Debug output of the string
         {
-            QPair<QString,QString> tempPair;
+            QPair<QString, QString> tempPair;
             QString line = in.readLine();
-            //qDebug() << line;
+            // qDebug() << line;
             QList<QString> splitList = line.split(":");
             tempPair.first = splitList[0];
             tempPair.second = splitList[1];
@@ -44,11 +40,12 @@ QList<QString> parsegithubData::readTrackData()
 
     pairs = returnData;
     QList<QString> returnStringList;
-    for(QPair<QString,QString> pair: returnData)
-    {
+    for (QPair<QString, QString> pair : returnData) {
         QString tempString;
-        //tempString = "https://raw.githubusercontent.com/Deadelven/PTKML/main/kmls/" + pair.first + "/" +pair.second+".txt";
-        tempString = "https://gitlab.com/PowerTuneDigital/PowertuneTracks/-/raw/main/Tracks/" + pair.first + "/" +pair.second;
+        // tempString = "https://raw.githubusercontent.com/Deadelven/PTKML/main/kmls/" + pair.first + "/"
+        // +pair.second+".txt";
+        tempString =
+            "https://gitlab.com/PowerTuneDigital/PowertuneTracks/-/raw/main/Tracks/" + pair.first + "/" + pair.second;
         returnStringList.append(tempString);
     }
     return returnStringList;
@@ -56,48 +53,45 @@ QList<QString> parsegithubData::readTrackData()
 
 void parsegithubData::sortDownloadedFiles()
 {
-    //qDebug() << "SortFiles";
+    // qDebug() << "SortFiles";
     QString p2String;
     QString destinationString;
 
     QDir dir;
 
-    #ifdef __linux__
-        p2String = ("/opt/PowerTune/");
-        destinationString = ("/home/pi/KTracks/");
-    #elif _WIN32
-        p2String = pathString.remove("repo.txt");
-        destinationString = pathString.remove("repo.txt");
-    #else
+#ifdef __linux__
+    p2String = ("/opt/PowerTune/");
+    destinationString = ("/home/pi/KTracks/");
+#elif _WIN32
+    p2String = pathString.remove("repo.txt");
+    destinationString = pathString.remove("repo.txt");
+#else
 
-    #endif
-
-
+#endif
 
 
-    for(QPair<QString,QString> pair: pairs)
-    {
-        QFileInfo outputDir(destinationString+pair.first);
-       // qDebug() <<"Output directory"<< outputDir;
-        QFileInfo outputFile(destinationString+pair.first+"/"+pair.second);
-       // qDebug() <<"Output file"<<outputFile;
-        if(!outputDir.exists())
-        {
-           // qDebug() <<"Create Directory";
-            dir.mkpath(destinationString+pair.first);
+    for (QPair<QString, QString> pair : pairs) {
+        QFileInfo outputDir(destinationString + pair.first);
+        // qDebug() <<"Output directory"<< outputDir;
+        QFileInfo outputFile(destinationString + pair.first + "/" + pair.second);
+        // qDebug() <<"Output file"<<outputFile;
+        if (!outputDir.exists()) {
+            // qDebug() <<"Create Directory";
+            dir.mkpath(destinationString + pair.first);
         }
 
-        if(outputFile.exists())
-        {
-            //qDebug() << "removing !!!! " ;
-            dir.remove(destinationString+pair.first+"/"+pair.second);
+        if (outputFile.exists()) {
+            // qDebug() << "removing !!!! " ;
+            dir.remove(destinationString + pair.first + "/" + pair.second);
         }
-       // qDebug() << "CopyString " << p2String+pair.second << " TO " << destinationString+pair.first+"/" + pair.second;
-        //QFile::copy(p2String+pair.second, destinationString+pair.first+"/" + pair.second);
-        if(!QFile::copy(p2String+pair.second, destinationString+pair.first+"/" + pair.second)){
-                     // qDebug() << "Copy Failure!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"; // Still need to do something here in case copy fails
-              }
-        //remove original files after they been copied
-        QFile::remove(p2String+pair.second);
+        // qDebug() << "CopyString " << p2String+pair.second << " TO " << destinationString+pair.first+"/" +
+        // pair.second;
+        // QFile::copy(p2String+pair.second, destinationString+pair.first+"/" + pair.second);
+        if (!QFile::copy(p2String + pair.second, destinationString + pair.first + "/" + pair.second)) {
+            // qDebug() << "Copy Failure!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"; // Still need to do
+            // something here in case copy fails
+        }
+        // remove original files after they been copied
+        QFile::remove(p2String + pair.second);
     }
 }

@@ -1,16 +1,18 @@
+#include "Core/connect.h"
+#include "Hardware/Extender.h"
+#include "Utils/downloadmanager.h"
+#include "Utils/iomapdata.h"
+
 #include <QApplication>
+#include <QDateTime>
+#include <QDebug>
+#include <QFileSystemModel>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtQml>
-#include <QFileSystemModel>
-#include "Core/connect.h"
-#include "Hardware/Extender.h"
-#include "Utils/iomapdata.h"
-#include "Utils/downloadmanager.h"
-#include <QDebug>
-#include <QDateTime>
+
 #include <cstdio>
-    ioMapData mpd;
+ioMapData mpd;
 
 int main(int argc, char *argv[])
 {
@@ -26,7 +28,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("IMD", new ioMapData(&engine));
     engine.rootContext()->setContextProperty("DLM", new DownloadManager(&engine));
     engine.rootContext()->setContextProperty("Connect", new Connect(&engine));
-    engine.rootContext()->setContextProperty("Extender2",new Extender(&engine));
+    engine.rootContext()->setContextProperty("Extender2", new Extender(&engine));
 #ifdef HAVE_DDCUTIL
     engine.rootContext()->setContextProperty("HAVE_DDCUTIL", true);
 #else
@@ -34,6 +36,4 @@ int main(int argc, char *argv[])
 #endif
     engine.load(QUrl(QStringLiteral("qrc:/QML/main.qml")));
     return app.exec();
-
 }
-

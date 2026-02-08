@@ -1,7 +1,7 @@
 /**
  * @file EngineData.h
  * @brief Engine-specific data model for PowerTune
- * 
+ *
  * This class encapsulates all engine-related sensor data including:
  * - RPM, boost, MAP, TPS, throttle
  * - Injector duty, pulse width, timing
@@ -10,7 +10,7 @@
  * - Engine load, dwell, knock
  * - Cylinder-specific data (AFR, O2 correction)
  * - EGT 1-12
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -68,10 +68,14 @@ class EngineData : public QObject
     Q_PROPERTY(qreal fuelflow READ fuelflow WRITE setfuelflow NOTIFY fuelflowChanged)
     Q_PROPERTY(qreal fuelflowdiff READ fuelflowdiff WRITE setfuelflowdiff NOTIFY fuelflowdiffChanged)
     Q_PROPERTY(qreal fuelflowret READ fuelflowret WRITE setfuelflowret NOTIFY fuelflowretChanged)
-    Q_PROPERTY(qreal fueltrimlongtbank1 READ fueltrimlongtbank1 WRITE setfueltrimlongtbank1 NOTIFY fueltrimlongtbank1Changed)
-    Q_PROPERTY(qreal fueltrimlongtbank2 READ fueltrimlongtbank2 WRITE setfueltrimlongtbank2 NOTIFY fueltrimlongtbank2Changed)
-    Q_PROPERTY(qreal fueltrimshorttbank1 READ fueltrimshorttbank1 WRITE setfueltrimshorttbank1 NOTIFY fueltrimshorttbank1Changed)
-    Q_PROPERTY(qreal fueltrimshorttbank2 READ fueltrimshorttbank2 WRITE setfueltrimshorttbank2 NOTIFY fueltrimshorttbank2Changed)
+    Q_PROPERTY(
+        qreal fueltrimlongtbank1 READ fueltrimlongtbank1 WRITE setfueltrimlongtbank1 NOTIFY fueltrimlongtbank1Changed)
+    Q_PROPERTY(
+        qreal fueltrimlongtbank2 READ fueltrimlongtbank2 WRITE setfueltrimlongtbank2 NOTIFY fueltrimlongtbank2Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank1 READ fueltrimshorttbank1 WRITE setfueltrimshorttbank1 NOTIFY
+                   fueltrimshorttbank1Changed)
+    Q_PROPERTY(qreal fueltrimshorttbank2 READ fueltrimshorttbank2 WRITE setfueltrimshorttbank2 NOTIFY
+                   fueltrimshorttbank2Changed)
     Q_PROPERTY(qreal totalfueltrim READ totalfueltrim WRITE settotalfueltrim NOTIFY totalfueltrimChanged)
     Q_PROPERTY(qreal avfueleconomy READ avfueleconomy WRITE setavfueleconomy NOTIFY avfueleconomyChanged)
 
@@ -136,10 +140,14 @@ class EngineData : public QObject
     Q_PROPERTY(qreal lambda4 READ lambda4 WRITE setlambda4 NOTIFY lambda4Changed)
     Q_PROPERTY(qreal Lambdamultiply READ Lambdamultiply WRITE setLambdamultiply NOTIFY LambdamultiplyChanged)
     Q_PROPERTY(qreal AFR READ AFR WRITE setAFR NOTIFY aFRChanged)
-    Q_PROPERTY(qreal AFRLEFTBANKTARGET READ AFRLEFTBANKTARGET WRITE setAFRLEFTBANKTARGET NOTIFY AFRLEFTBANKTARGETChanged)
-    Q_PROPERTY(qreal AFRRIGHTBANKTARGET READ AFRRIGHTBANKTARGET WRITE setAFRRIGHTBANKTARGET NOTIFY AFRRIGHTBANKTARGETChanged)
-    Q_PROPERTY(qreal AFRLEFTBANKACTUAL READ AFRLEFTBANKACTUAL WRITE setAFRLEFTBANKACTUAL NOTIFY AFRLEFTBANKACTUALChanged)
-    Q_PROPERTY(qreal AFRRIGHTBANKACTUAL READ AFRRIGHTBANKACTUAL WRITE setAFRRIGHTBANKACTUAL NOTIFY AFRRIGHTBANKACTUALChanged)
+    Q_PROPERTY(
+        qreal AFRLEFTBANKTARGET READ AFRLEFTBANKTARGET WRITE setAFRLEFTBANKTARGET NOTIFY AFRLEFTBANKTARGETChanged)
+    Q_PROPERTY(
+        qreal AFRRIGHTBANKTARGET READ AFRRIGHTBANKTARGET WRITE setAFRRIGHTBANKTARGET NOTIFY AFRRIGHTBANKTARGETChanged)
+    Q_PROPERTY(
+        qreal AFRLEFTBANKACTUAL READ AFRLEFTBANKACTUAL WRITE setAFRLEFTBANKACTUAL NOTIFY AFRLEFTBANKACTUALChanged)
+    Q_PROPERTY(
+        qreal AFRRIGHTBANKACTUAL READ AFRRIGHTBANKACTUAL WRITE setAFRRIGHTBANKACTUAL NOTIFY AFRRIGHTBANKACTUALChanged)
     Q_PROPERTY(qreal LEFTBANKO2CORR READ LEFTBANKO2CORR WRITE setLEFTBANKO2CORR NOTIFY LEFTBANKO2CORRChanged)
     Q_PROPERTY(qreal RIGHTBANKO2CORR READ RIGHTBANKO2CORR WRITE setRIGHTBANKO2CORR NOTIFY RIGHTBANKO2CORRChanged)
     Q_PROPERTY(qreal TRIM READ TRIM WRITE setTRIM NOTIFY tRIMChanged)
@@ -208,17 +216,23 @@ class EngineData : public QObject
     Q_PROPERTY(qreal nosswitch READ nosswitch WRITE setnosswitch NOTIFY nosswitchChanged)
     Q_PROPERTY(qreal nitrous1_duty READ nitrous1_duty WRITE setnitrous1_duty NOTIFY nitrous1_dutyChanged)
     Q_PROPERTY(qreal nitrous2_duty READ nitrous2_duty WRITE setnitrous2_duty NOTIFY nitrous2_dutyChanged)
-    Q_PROPERTY(qreal nitrous_timer_out READ nitrous_timer_out WRITE setnitrous_timer_out NOTIFY nitrous_timer_outChanged)
+    Q_PROPERTY(
+        qreal nitrous_timer_out READ nitrous_timer_out WRITE setnitrous_timer_out NOTIFY nitrous_timer_outChanged)
     Q_PROPERTY(qreal n2o_addfuel READ n2o_addfuel WRITE setn2o_addfuel NOTIFY n2o_addfuelChanged)
     Q_PROPERTY(qreal n2o_retard READ n2o_retard WRITE setn2o_retard NOTIFY n2o_retardChanged)
 
     // * Launch/Antilag Control
-    Q_PROPERTY(qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
+    Q_PROPERTY(
+        qreal antilaglauchswitch READ antilaglauchswitch WRITE setantilaglauchswitch NOTIFY antilaglauchswitchChanged)
     Q_PROPERTY(qreal antilaglaunchon READ antilaglaunchon WRITE setantilaglaunchon NOTIFY antilaglaunchonChanged)
-    Q_PROPERTY(qreal auxrevlimitswitch READ auxrevlimitswitch WRITE setauxrevlimitswitch NOTIFY auxrevlimitswitchChanged)
-    Q_PROPERTY(qreal rallyantilagswitch READ rallyantilagswitch WRITE setrallyantilagswitch NOTIFY rallyantilagswitchChanged)
-    Q_PROPERTY(qreal launchcontolfuelenrich READ launchcontolfuelenrich WRITE setlaunchcontolfuelenrich NOTIFY launchcontolfuelenrichChanged)
-    Q_PROPERTY(qreal launchctrolignretard READ launchctrolignretard WRITE setlaunchctrolignretard NOTIFY launchctrolignretardChanged)
+    Q_PROPERTY(
+        qreal auxrevlimitswitch READ auxrevlimitswitch WRITE setauxrevlimitswitch NOTIFY auxrevlimitswitchChanged)
+    Q_PROPERTY(
+        qreal rallyantilagswitch READ rallyantilagswitch WRITE setrallyantilagswitch NOTIFY rallyantilagswitchChanged)
+    Q_PROPERTY(qreal launchcontolfuelenrich READ launchcontolfuelenrich WRITE setlaunchcontolfuelenrich NOTIFY
+                   launchcontolfuelenrichChanged)
+    Q_PROPERTY(qreal launchctrolignretard READ launchctrolignretard WRITE setlaunchctrolignretard NOTIFY
+                   launchctrolignretardChanged)
     Q_PROPERTY(qreal flatshiftstate READ flatshiftstate WRITE setflatshiftstate NOTIFY flatshiftstateChanged)
 
     // * Rev Limiters
@@ -229,13 +243,15 @@ class EngineData : public QObject
 
     // * Traction Control
     Q_PROPERTY(qreal tractionControl READ tractionControl WRITE settractionControl NOTIFY tractionControlChanged)
-    Q_PROPERTY(qreal TRACTIONCTRLOFFSET READ TRACTIONCTRLOFFSET WRITE setTRACTIONCTRLOFFSET NOTIFY TRACTIONCTRLOFFSETChanged)
+    Q_PROPERTY(
+        qreal TRACTIONCTRLOFFSET READ TRACTIONCTRLOFFSET WRITE setTRACTIONCTRLOFFSET NOTIFY TRACTIONCTRLOFFSETChanged)
     Q_PROPERTY(qreal DRIVESHAFTOFFSET READ DRIVESHAFTOFFSET WRITE setDRIVESHAFTOFFSET NOTIFY DRIVESHAFTOFFSETChanged)
     Q_PROPERTY(qreal TCCOMMAND READ TCCOMMAND WRITE setTCCOMMAND NOTIFY TCCOMMANDChanged)
     Q_PROPERTY(qreal FSLCOMMAND READ FSLCOMMAND WRITE setFSLCOMMAND NOTIFY FSLCOMMANDChanged)
     Q_PROPERTY(qreal FSLINDEX READ FSLINDEX WRITE setFSLINDEX NOTIFY FSLINDEXChanged)
     Q_PROPERTY(qreal dsettargetslip READ dsettargetslip WRITE setdsettargetslip NOTIFY dsettargetslipChanged)
-    Q_PROPERTY(qreal tractionctlpowerlimit READ tractionctlpowerlimit WRITE settractionctlpowerlimit NOTIFY tractionctlpowerlimitChanged)
+    Q_PROPERTY(qreal tractionctlpowerlimit READ tractionctlpowerlimit WRITE settractionctlpowerlimit NOTIFY
+                   tractionctlpowerlimitChanged)
 
     // * ECU State
     Q_PROPERTY(qreal BatteryV READ BatteryV WRITE setBatteryV NOTIFY batteryVChanged)
@@ -251,17 +267,22 @@ class EngineData : public QObject
     Q_PROPERTY(qreal genericoutput1 READ genericoutput1 WRITE setgenericoutput1 NOTIFY genericoutput1Changed)
 
     // * Torque Management
-    Q_PROPERTY(qreal torqueredcutactive READ torqueredcutactive WRITE settorqueredcutactive NOTIFY torqueredcutactiveChanged)
-    Q_PROPERTY(qreal torqueredlevelactive READ torqueredlevelactive WRITE settorqueredlevelactive NOTIFY torqueredlevelactiveChanged)
-    Q_PROPERTY(qreal transientthroactive READ transientthroactive WRITE settransientthroactive NOTIFY transientthroactiveChanged)
+    Q_PROPERTY(
+        qreal torqueredcutactive READ torqueredcutactive WRITE settorqueredcutactive NOTIFY torqueredcutactiveChanged)
+    Q_PROPERTY(qreal torqueredlevelactive READ torqueredlevelactive WRITE settorqueredlevelactive NOTIFY
+                   torqueredlevelactiveChanged)
+    Q_PROPERTY(qreal transientthroactive READ transientthroactive WRITE settransientthroactive NOTIFY
+                   transientthroactiveChanged)
 
     // * Timing/Triggers
     Q_PROPERTY(qreal triggerccounter READ triggerccounter WRITE settriggerccounter NOTIFY triggerccounterChanged)
-    Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY triggersrsinceasthomeChanged)
+    Q_PROPERTY(qreal triggersrsinceasthome READ triggersrsinceasthome WRITE settriggersrsinceasthome NOTIFY
+                   triggersrsinceasthomeChanged)
     Q_PROPERTY(qreal homeccounter READ homeccounter WRITE sethomeccounter NOTIFY homeccounterChanged)
     Q_PROPERTY(qreal timeddutyout1 READ timeddutyout1 WRITE settimeddutyout1 NOTIFY timeddutyout1Changed)
     Q_PROPERTY(qreal timeddutyout2 READ timeddutyout2 WRITE settimeddutyout2 NOTIFY timeddutyout2Changed)
-    Q_PROPERTY(qreal timeddutyoutputactive READ timeddutyoutputactive WRITE settimeddutyoutputactive NOTIFY timeddutyoutputactiveChanged)
+    Q_PROPERTY(qreal timeddutyoutputactive READ timeddutyoutputactive WRITE settimeddutyoutputactive NOTIFY
+                   timeddutyoutputactiveChanged)
 
     // * Misc
     Q_PROPERTY(qreal na1 READ na1 WRITE setna1 NOTIFY na1Changed)
@@ -1300,4 +1321,4 @@ private:
     int m_CalibrationSelect = 0;
 };
 
-#endif // ENGINEDATA_H
+#endif  // ENGINEDATA_H

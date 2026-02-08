@@ -1,48 +1,36 @@
 #include "UDPReceiver.h"
+
 #include "../Core/dashboard.h"
-#include <QUdpSocket>
-#include <QHostAddress>
+
 #include <QDataStream>
+#include <QHostAddress>
+#include <QUdpSocket>
 
 
-udpreceiver::udpreceiver(QObject *parent)
-    : QObject(parent)
-    , m_dashboard(nullptr)
-
-{
-
-}
-udpreceiver::udpreceiver(DashBoard *dashboard, QObject *parent)
-    : QObject(parent)
-    , m_dashboard(dashboard)
-
-{
-
-}
+udpreceiver::udpreceiver(QObject *parent) : QObject(parent), m_dashboard(nullptr) {}
+udpreceiver::udpreceiver(DashBoard *dashboard, QObject *parent) : QObject(parent), m_dashboard(dashboard) {}
 
 void udpreceiver::startreceiver()
 {
     udpSocket = new QUdpSocket(this);
     udpSocket->bind(45454, QUdpSocket::ShareAddress);
     connect(udpSocket, &QUdpSocket::readyRead, this, &udpreceiver::processPendingDatagrams);
-
 }
 
 void udpreceiver::closeConnection()
 {
-    //qDebug()<< udpSocket->state();
-/*
-    if (udpSocket->isOpen())
-    {
-        qDebug()<< "UDP is open";
-        //udpSocket->close();
-        //delete udpSocket;
-    }
-*/
+    // qDebug()<< udpSocket->state();
+    /*
+        if (udpSocket->isOpen())
+        {
+            qDebug()<< "UDP is open";
+            //udpSocket->close();
+            //delete udpSocket;
+        }
+    */
 }
 void udpreceiver::processPendingDatagrams()
 {
-
     QByteArray datagram;
 
     while (udpSocket->hasPendingDatagrams()) {
@@ -51,21 +39,20 @@ void udpreceiver::processPendingDatagrams()
 
         QDataStream in(&datagram, QIODevice::ReadOnly);
         QString raw = datagram.data();
-        //qDebug()<<raw;
-        if (raw.isEmpty())
-        {raw ="0,0";}
-        if (raw.contains(","))
-        {
-            //do nothing
+        // qDebug()<<raw;
+        if (raw.isEmpty()) {
+            raw = "0,0";
         }
-        else
-        {raw ="0,0";}
-        QStringList list = raw.split( "," );
-        int ident =list[0].toInt();
-        float Value =list[1].toFloat();
+        if (raw.contains(",")) {
+            // do nothing
+        } else {
+            raw = "0,0";
+        }
+        QStringList list = raw.split(",");
+        int ident = list[0].toInt();
+        float Value = list[1].toFloat();
 
-        switch(ident) {
-
+        switch (ident) {
         case 1:
             m_dashboard->setaccelpedpos(Value);
             break;
@@ -139,7 +126,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setBoostwg(Value);
             break;
         case 25:
-            //m_dashboard->setbrakepedalstate(Value);
+            // m_dashboard->setbrakepedalstate(Value);
             break;
         case 26:
             m_dashboard->setbrakepress(Value);
@@ -289,22 +276,22 @@ void udpreceiver::processPendingDatagrams()
             // Ignition Angle Bank 1
             break;
         case 75:
-            //Ignition Angle Bank 2
+            // Ignition Angle Bank 2
             break;
         case 76:
-            //Torque Management Driveshaft RPM Target
+            // Torque Management Driveshaft RPM Target
             break;
         case 77:
-            //Torque Management Driveshaft RPM Target Error
+            // Torque Management Driveshaft RPM Target Error
             break;
         case 78:
-            //Torque Management Driveshaft RPM Target Error Ignition Correction
+            // Torque Management Driveshaft RPM Target Error Ignition Correction
             break;
         case 79:
-            //Torque Management Driveshaft RPM Timed Ignition Correction
+            // Torque Management Driveshaft RPM Timed Ignition Correction
             break;
         case 80:
-            //Torque Management Combined Ignition Correction
+            // Torque Management Combined Ignition Correction
             break;
         case 81:
             m_dashboard->setflatshiftstate(Value);
@@ -362,8 +349,8 @@ void udpreceiver::processPendingDatagrams()
             break;
         case 109:
             //-25.809581, 28.112241
-           // m_dashboard->setgpsLatitude(QString::number(-25.809581));
-           // m_dashboard->setgpsLongitude(QString::number(28.112241));
+            // m_dashboard->setgpsLatitude(QString::number(-25.809581));
+            // m_dashboard->setgpsLongitude(QString::number(28.112241));
             break;
         case 110:
             //            m_dashboard->setgpsLongitude(Value);
@@ -606,42 +593,41 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setsens8(Value);
             break;
         case 190:
-            //Generic Output 1 Duty Cycl
+            // Generic Output 1 Duty Cycl
             m_dashboard->setgenericoutput1(Value);
             break;
         case 191:
-            //Fuel Level
+            // Fuel Level
             m_dashboard->setFuelLevel(Value);
             break;
         case 192:
-            //Turbo Timer - Time Remaining
+            // Turbo Timer - Time Remaining
             break;
         case 193:
-            //Turbo Timer - Engine Time Remaining
+            // Turbo Timer - Engine Time Remaining
             break;
         case 194:
-            //Steering Wheel Angle
+            // Steering Wheel Angle
             m_dashboard->setSteeringWheelAngle(Value);
             break;
         case 195:
-            //Driveshaft RPM
+            // Driveshaft RPM
             break;
         case 196:
-            //NOS Pressure Sensor 2
+            // NOS Pressure Sensor 2
             break;
         case 197:
-            //NOS Pressure Sensor 3
+            // NOS Pressure Sensor 3
             break;
         case 198:
-            //NOS Pressure Sensor 4
+            // NOS Pressure Sensor 4
             break;
         case 199:
-            if (m_dashboard->ExternalSpeed() == 0 )
-            {
-            m_dashboard->setSpeed(Value);
+            if (m_dashboard->ExternalSpeed() == 0) {
+                m_dashboard->setSpeed(Value);
+            } else {
+                break;
             }
-            else
-            {break;}
             break;
         case 200:
             m_dashboard->setSVSS(Value);
@@ -737,12 +723,12 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setIntakepress(Value);
             break;
 
-            //not yet implemented
+            // not yet implemented
         case 255:
-            //CAS REF
+            // CAS REF
             break;
         case 259:
-            //AAC Valve
+            // AAC Valve
             break;
         case 260:
             m_dashboard->setAnalog0(Value);
@@ -781,13 +767,13 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setGearOilPress(Value);
             break;
         case 272:
-            //Injection Stage 3 Duty Cycle
+            // Injection Stage 3 Duty Cycle
             break;
         case 273:
-            //MAP N
+            // MAP N
             break;
         case 274:
-            //MAP P
+            // MAP P
             break;
         case 275:
             m_dashboard->setInjDuty2(Value);
@@ -796,7 +782,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setInjAngle(Value);
             break;
         case 277:
-            //Catalyst Temp Bank1 S1
+            // Catalyst Temp Bank1 S1
             break;
         case 278:
             m_dashboard->setBoostPreskpa(Value);
@@ -862,7 +848,7 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setUserchannel12(Value);
             break;
 
-      /////
+            /////
         case 400:
             m_dashboard->setigncut(Value);
             break;
@@ -914,8 +900,7 @@ void udpreceiver::processPendingDatagrams()
         case 416:
             m_dashboard->setactivetunetable(Value);
             break;
-     /////
-
+            /////
 
 
         case 800:
@@ -991,14 +976,14 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setFlagString16(list[1]);
             break;
         case 824:
-            //m_dashboard->setModel(list[1]);
+            // m_dashboard->setModel(list[1]);
             break;
         case 825:
             m_dashboard->setError(list[1]);
             break;
         case 826:
             m_dashboard->setautogear(list[1]);
-            break;       
+            break;
         case 827:
             m_dashboard->setoilpressurelamp(Value);
             break;
@@ -1014,101 +999,101 @@ void udpreceiver::processPendingDatagrams()
         case 831:
             m_dashboard->setAuxTemp1(Value);
         case 832:
-             m_dashboard->setIGBTPhaseATemp(Value);
-             break;
-         case 833:
-             m_dashboard->setIGBTPhaseBTemp(Value);
-             break;
-         case 834:
-             m_dashboard->setIGBTPhaseCTemp(Value);
-             break;
-         case 835:
-             m_dashboard->setGateDriverTemp(Value);
-             break;
-         case 836:
-             m_dashboard->setControlBoardTemp(Value);
-             break;
-         case 837:
-             m_dashboard->setRtdTemp1(Value);
-             break;
-         case 838:
-             m_dashboard->setRtdTemp2(Value);
-             break;
-         case 839:
-             m_dashboard->setRtdTemp3(Value);
-             break;
-         case 840:
-             m_dashboard->setRtdTemp4(Value);
-             break;
-         case 841:
-             m_dashboard->setRtdTemp5(Value);
-             break;
-         case 842:
-             m_dashboard->setEMotorTemperature(Value);
-             break;
-         case 843:
-             m_dashboard->setTorqueShudder(Value);
-             break;
-         case 844:
-             m_dashboard->setDigInput1FowardSw(Value);
-             break;
-         case 845:
-             m_dashboard->setDigInput2ReverseSw(Value);
-             break;
-         case 846:
-             m_dashboard->setDigInput3BrakeSw(Value);
-             break;
-         case 847:
-             m_dashboard->setDigInput4RegenDisableSw(Value);
-             break;
-         case 848:
-             m_dashboard->setDigInput5IgnSw(Value);
-             break;
-         case 849:
-             m_dashboard->setDigInput6StartSw(Value);
-             break;
-         case 850:
-             m_dashboard->setDigInput7Bool(Value);
-             break;
-         case 851:
-             m_dashboard->setDigInput8Bool(Value);
-             break;
-         case 852:
-             m_dashboard->setEMotorAngle(Value);
-             break;
-         case 853:
-             m_dashboard->setEMotorSpeed(Value);
-             break;
-         case 854:
-             m_dashboard->setElectricalOutFreq(Value);
-             break;
-         case 855:
-             m_dashboard->setDeltaResolverFiltered(Value);
-             break;
-         case 856:
-             m_dashboard->setPhaseACurrent(Value);
-             break;
-         case 857:
-             m_dashboard->setPhaseBCurrent(Value);
-             break;
-         case 858:
-             m_dashboard->setPhaseCCurrent(Value);
-             break;
-         case 859:
-             m_dashboard->setDCBusCurrent(Value);
-             break;
-         case 860:
-             m_dashboard->setDCBusVoltage(Value);
-             break;
-         case 861:
-             m_dashboard->setOutputVoltage(Value);
-             break;
-         case 862:
-             m_dashboard->setVABvdVoltage(Value);
-             break;
-         case 863:
-             m_dashboard->setVBCvqVoltage(Value);
-             break;
+            m_dashboard->setIGBTPhaseATemp(Value);
+            break;
+        case 833:
+            m_dashboard->setIGBTPhaseBTemp(Value);
+            break;
+        case 834:
+            m_dashboard->setIGBTPhaseCTemp(Value);
+            break;
+        case 835:
+            m_dashboard->setGateDriverTemp(Value);
+            break;
+        case 836:
+            m_dashboard->setControlBoardTemp(Value);
+            break;
+        case 837:
+            m_dashboard->setRtdTemp1(Value);
+            break;
+        case 838:
+            m_dashboard->setRtdTemp2(Value);
+            break;
+        case 839:
+            m_dashboard->setRtdTemp3(Value);
+            break;
+        case 840:
+            m_dashboard->setRtdTemp4(Value);
+            break;
+        case 841:
+            m_dashboard->setRtdTemp5(Value);
+            break;
+        case 842:
+            m_dashboard->setEMotorTemperature(Value);
+            break;
+        case 843:
+            m_dashboard->setTorqueShudder(Value);
+            break;
+        case 844:
+            m_dashboard->setDigInput1FowardSw(Value);
+            break;
+        case 845:
+            m_dashboard->setDigInput2ReverseSw(Value);
+            break;
+        case 846:
+            m_dashboard->setDigInput3BrakeSw(Value);
+            break;
+        case 847:
+            m_dashboard->setDigInput4RegenDisableSw(Value);
+            break;
+        case 848:
+            m_dashboard->setDigInput5IgnSw(Value);
+            break;
+        case 849:
+            m_dashboard->setDigInput6StartSw(Value);
+            break;
+        case 850:
+            m_dashboard->setDigInput7Bool(Value);
+            break;
+        case 851:
+            m_dashboard->setDigInput8Bool(Value);
+            break;
+        case 852:
+            m_dashboard->setEMotorAngle(Value);
+            break;
+        case 853:
+            m_dashboard->setEMotorSpeed(Value);
+            break;
+        case 854:
+            m_dashboard->setElectricalOutFreq(Value);
+            break;
+        case 855:
+            m_dashboard->setDeltaResolverFiltered(Value);
+            break;
+        case 856:
+            m_dashboard->setPhaseACurrent(Value);
+            break;
+        case 857:
+            m_dashboard->setPhaseBCurrent(Value);
+            break;
+        case 858:
+            m_dashboard->setPhaseCCurrent(Value);
+            break;
+        case 859:
+            m_dashboard->setDCBusCurrent(Value);
+            break;
+        case 860:
+            m_dashboard->setDCBusVoltage(Value);
+            break;
+        case 861:
+            m_dashboard->setOutputVoltage(Value);
+            break;
+        case 862:
+            m_dashboard->setVABvdVoltage(Value);
+            break;
+        case 863:
+            m_dashboard->setVBCvqVoltage(Value);
+            break;
 
 
         case 864:
@@ -1135,7 +1120,7 @@ void udpreceiver::processPendingDatagrams()
         case 871:
             m_dashboard->setTirepresRR(Value);
             break;
-//EX Board
+            // EX Board
         case 900:
             m_dashboard->setEXDigitalInput1(Value);
             break;
@@ -1161,30 +1146,30 @@ void udpreceiver::processPendingDatagrams()
             m_dashboard->setEXDigitalInput8(Value);
             break;
         case 908:
-            m_dashboard->setEXAnalogInput0(Value/1000);
+            m_dashboard->setEXAnalogInput0(Value / 1000);
             break;
         case 909:
-            m_dashboard->setEXAnalogInput1(Value/1000);
+            m_dashboard->setEXAnalogInput1(Value / 1000);
             break;
         case 910:
-            m_dashboard->setEXAnalogInput2(Value/1000);
+            m_dashboard->setEXAnalogInput2(Value / 1000);
             break;
         case 911:
-            m_dashboard->setEXAnalogInput3(Value/1000);
+            m_dashboard->setEXAnalogInput3(Value / 1000);
             break;
         case 912:
-            m_dashboard->setEXAnalogInput4(Value/1000);
+            m_dashboard->setEXAnalogInput4(Value / 1000);
             break;
         case 913:
-            m_dashboard->setEXAnalogInput5(Value/1000);
+            m_dashboard->setEXAnalogInput5(Value / 1000);
             break;
         case 914:
-            m_dashboard->setEXAnalogInput6(Value/1000);
+            m_dashboard->setEXAnalogInput6(Value / 1000);
             break;
         case 915:
-            m_dashboard->setEXAnalogInput7(Value/1000);
+            m_dashboard->setEXAnalogInput7(Value / 1000);
             break;
-//Bigstuff Extra
+            // Bigstuff Extra
         case 916:
             m_dashboard->setAFRcyl1(Value);
             break;

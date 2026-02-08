@@ -1,16 +1,16 @@
 #ifndef IOMAPDATA_H
 #define IOMAPDATA_H
 
+#include <QList>
 #include <QObject>
 #include <QString>
-#include <QList>
 #include <QtPositioning>
 
-class ioMapData:public QObject
+class ioMapData : public QObject
 {
     Q_OBJECT
 public:
-    explicit ioMapData(QObject *parent = 0);
+    explicit ioMapData(QObject *parent = nullptr);
     Q_INVOKABLE QGeoPath loadMapData(QString country, QString trackName);
     Q_INVOKABLE QGeoPath parseKML(QList<QString> list);
     Q_INVOKABLE QList<QString> getCountries();
@@ -30,4 +30,4 @@ signals:
 public slots:
 };
 
-#endif // IOMAPDATA_H
+#endif  // IOMAPDATA_H

@@ -1,7 +1,7 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
-#include <QThread>
 #include <QObject>
+#include <QThread>
 #include <QTime>
 #include <QTimer>
 
@@ -13,17 +13,15 @@ class calculations : public QObject
 
 
 public:
-
-
-    explicit calculations(QObject *parent = 0);
-    explicit calculations(DashBoard *dashboard, QObject *parent = 0);
+    explicit calculations(QObject *parent = nullptr);
+    explicit calculations(DashBoard *dashboard, QObject *parent = nullptr);
 
 public slots:
     Q_INVOKABLE void startdragtimer();
     Q_INVOKABLE void startreactiontimer();
     Q_INVOKABLE void qmlrealtime();
     Q_INVOKABLE void stopreactiontimer();
-   // Q_INVOKABLE void calculatereactiontime();
+    // Q_INVOKABLE void calculatereactiontime();
     Q_INVOKABLE void readodoandtrip();
     void saveodoandtriptofile();
     void calculate();
@@ -32,16 +30,13 @@ public slots:
     void resettrip();
 
 
-
 private:
     DashBoard *m_dashboard;
-    QTimer      m_updatetimer;
-    QTimer      m_updateodotimer;
-    QTimer      m_reactiontimer;
-    QTimer      m_dynotimer;
-
+    QTimer m_updatetimer;
+    QTimer m_updateodotimer;
+    QTimer m_reactiontimer;
+    QTimer m_dynotimer;
 };
 
 
-
-#endif // CALCULATIONS_H
+#endif  // CALCULATIONS_H

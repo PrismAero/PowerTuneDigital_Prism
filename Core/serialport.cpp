@@ -1,9 +1,7 @@
 
 #include "serialport.h"
 
-SerialPort::SerialPort(QObject *parent) : QSerialPort(parent)
-{
-}
+SerialPort::SerialPort(QObject *parent) : QSerialPort(parent) {}
 
 void SerialPort::setParity(const int &parity)
 {

@@ -1,13 +1,13 @@
 /**
  * @file TimingData.h
  * @brief Performance timing/drag strip data model for PowerTune
- * 
+ *
  * This class encapsulates drag strip and performance timing data including:
  * - 60ft, 330ft, 1/8 mile, 1/4 mile times/speeds
  * - 0-100, 100-200, 200-300 times
  * - Reaction time
  * - Lap timing data
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -23,22 +23,27 @@ class TimingData : public QObject
 
     // * Drag Strip - Times
     Q_PROPERTY(qreal sixtyfoottime READ sixtyfoottime WRITE setsixtyfoottime NOTIFY sixtyfoottimeChanged)
-    Q_PROPERTY(qreal threehundredthirtyfoottime READ threehundredthirtyfoottime WRITE setthreehundredthirtyfoottime NOTIFY threehundredthirtyfoottimeChanged)
+    Q_PROPERTY(qreal threehundredthirtyfoottime READ threehundredthirtyfoottime WRITE setthreehundredthirtyfoottime
+                   NOTIFY threehundredthirtyfoottimeChanged)
     Q_PROPERTY(qreal eightmiletime READ eightmiletime WRITE seteightmiletime NOTIFY eightmiletimeChanged)
     Q_PROPERTY(qreal quartermiletime READ quartermiletime WRITE setquartermiletime NOTIFY quartermiletimeChanged)
     Q_PROPERTY(qreal thousandfoottime READ thousandfoottime WRITE setthousandfoottime NOTIFY thousandfoottimeChanged)
 
     // * Drag Strip - Speeds
     Q_PROPERTY(qreal sixtyfootspeed READ sixtyfootspeed WRITE setsixtyfootspeed NOTIFY sixtyfootspeedChanged)
-    Q_PROPERTY(qreal threehundredthirtyfootspeed READ threehundredthirtyfootspeed WRITE setthreehundredthirtyfootspeed NOTIFY threehundredthirtyfootspeedChanged)
+    Q_PROPERTY(qreal threehundredthirtyfootspeed READ threehundredthirtyfootspeed WRITE setthreehundredthirtyfootspeed
+                   NOTIFY threehundredthirtyfootspeedChanged)
     Q_PROPERTY(qreal eightmilespeed READ eightmilespeed WRITE seteightmilespeed NOTIFY eightmilespeedChanged)
     Q_PROPERTY(qreal quartermilespeed READ quartermilespeed WRITE setquartermilespeed NOTIFY quartermilespeedChanged)
-    Q_PROPERTY(qreal thousandfootspeed READ thousandfootspeed WRITE setthousandfootspeed NOTIFY thousandfootspeedChanged)
+    Q_PROPERTY(
+        qreal thousandfootspeed READ thousandfootspeed WRITE setthousandfootspeed NOTIFY thousandfootspeedChanged)
 
     // * Speed Tests
     Q_PROPERTY(qreal zerotohundredt READ zerotohundredt WRITE setzerotohundredt NOTIFY zerotohundredtChanged)
-    Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY hundredtotwohundredtimeChanged)
-    Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
+    Q_PROPERTY(qreal hundredtotwohundredtime READ hundredtotwohundredtime WRITE sethundredtotwohundredtime NOTIFY
+                   hundredtotwohundredtimeChanged)
+    Q_PROPERTY(qreal twohundredtothreehundredtime READ twohundredtothreehundredtime WRITE
+                   settwohundredtothreehundredtime NOTIFY twohundredtothreehundredtimeChanged)
 
     // * Reaction
     Q_PROPERTY(qreal reactiontime READ reactiontime WRITE setreactiontime NOTIFY reactiontimeChanged)
@@ -168,4 +173,4 @@ private:
     int m_currentLap = 0;
 };
 
-#endif // TIMINGDATA_H
+#endif  // TIMINGDATA_H

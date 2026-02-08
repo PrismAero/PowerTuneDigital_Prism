@@ -1,20 +1,14 @@
 #include "arduino.h"
-#include "../Core/dashboard.h"
+
 #include "../Core/connect.h"
-#include <QDebug>
+#include "../Core/dashboard.h"
+
 #include <QByteArrayMatcher>
+#include <QDebug>
 
-Arduino::Arduino(QObject *parent)
-    : QObject(parent)
-    , m_dashboard(nullptr)
-{
-}
+Arduino::Arduino(QObject *parent) : QObject(parent), m_dashboard(nullptr) {}
 
-Arduino::Arduino(DashBoard *dashboard, QObject *parent)
-    : QObject(parent)
-    , m_dashboard(dashboard)
-{
-}
+Arduino::Arduino(DashBoard *dashboard, QObject *parent) : QObject(parent), m_dashboard(dashboard) {}
 
 void Arduino::initSerialPort()
 {
@@ -22,20 +16,20 @@ void Arduino::initSerialPort()
     connect(m_serialport, &QSerialPort::readyRead, this, &Arduino::readyToRead);
     connect(m_serialport, &QSerialPort::errorOccurred, this, &Arduino::handleError);
     m_readData.clear();
-   // qDebug("Serial port set for arduino");
+    // qDebug("Serial port set for arduino");
 }
 
-//function for flushing all serial buffers
+// function for flushing all serial buffers
 void Arduino::clear()
 {
     m_serialport->clear();
 }
 
 
-//function to open serial port
+// function to open serial port
 void Arduino::openConnection(const QString &portName)
 {
-   // qDebug()<<"open Arduino  "+portName;
+    // qDebug()<<"open Arduino  "+portName;
 
     initSerialPort();
     m_serialport->setPortName(portName);
@@ -43,19 +37,15 @@ void Arduino::openConnection(const QString &portName)
     m_serialport->setParity(QSerialPort::NoParity);
     m_serialport->setDataBits(QSerialPort::Data8);
     m_serialport->setStopBits(QSerialPort::OneStop);
-    m_serialport->setFlowControl(QSerialPort::NoFlowControl);;
+    m_serialport->setFlowControl(QSerialPort::NoFlowControl);
+    ;
 
-    if(m_serialport->open(QIODevice::ReadWrite) == false)
-    {
+    if (m_serialport->open(QIODevice::ReadWrite) == false) {
         Arduino::closeConnection();
-     //   qDebug("no arduino");
+        //   qDebug("no arduino");
+    } else {
+        //  qDebug("arduino connected");
     }
-    else
-    {
-      //  qDebug("arduino connected");
-
-    }
-
 }
 void Arduino::closeConnection()
 {
@@ -71,9 +61,7 @@ void Arduino::closeConnection()
     m_dashboard->setSerialSpeed(0);
     m_dashboard->setSerialSpeed(0);
     m_dashboard->setSerialSpeed(0);
-
 }
-
 
 
 void Arduino::handleError(QSerialPort::SerialPortError serialPortError)
@@ -81,23 +69,19 @@ void Arduino::handleError(QSerialPort::SerialPortError serialPortError)
     if (serialPortError == QSerialPort::ReadError) {
         QString fileName = "Errors.txt";
         QFile mFile(fileName);
-        if(!mFile.open(QFile::Append | QFile::Text)){
-        }
+        if (!mFile.open(QFile::Append | QFile::Text)) {}
         QTextStream out(&mFile);
         out << "Serial Error " << (m_serialport->errorString()) << Qt::endl;
         mFile.close();
         m_dashboard->setSerialStat(m_serialport->errorString());
-
     }
 }
 
 
-
 void Arduino::readyToRead()
 {
-
     QByteArray test;
-    test =m_readData = m_serialport->readAll();
+    test = m_readData = m_serialport->readAll();
     /*
     QString fileName = "AdaptronicOutputTest.txt";
     QFile mFile(fileName);
@@ -107,18 +91,16 @@ void Arduino::readyToRead()
     out  << (test.toHex()) << Qt::endl;
     mFile.close();*/
     m_dashboard->setSerialStat(test.toHex());
-    //qDebug()<< "Arduino"+m_readData;
+    // qDebug()<< "Arduino"+m_readData;
     Arduino::assemblemessage(m_readData);
 }
 
 
 void Arduino::assemblemessage(const QByteArray &buffer)
 {
-
     m_buffer.append(buffer);
     QByteArray message = m_buffer;
-    if(m_buffer.contains("\r\n"))
-    {
+    if (m_buffer.contains("\r\n")) {
         int end = m_buffer.indexOf("\r\n") + 2;
         message.remove(m_buffer.indexOf("\r\n"), end);
         m_buffer.clear();
@@ -126,18 +108,12 @@ void Arduino::assemblemessage(const QByteArray &buffer)
         bool ok = false;
         float value = message.toFloat(&ok);
 
-        if (!ok)
-        {
+        if (!ok) {
             qDebug() << "Conversion failed";
         }
 
-        else
-        {
-
+        else {
             m_dashboard->setSerialSpeed(value);
         }
-
-
     }
-
 }

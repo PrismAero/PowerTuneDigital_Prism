@@ -10,14 +10,14 @@ class Arduino : public QObject
     Q_OBJECT
 
 public:
-    explicit Arduino(QObject *parent = 0);
-    explicit Arduino(DashBoard *dashboard, QObject *parent = 0);
+    explicit Arduino(QObject *parent = nullptr);
+    explicit Arduino(DashBoard *dashboard, QObject *parent = nullptr);
 
 private:
     DashBoard *m_dashboard;
     SerialPort *m_serialport;
-    QByteArray  m_readData;
-    QByteArray  m_buffer;
+    QByteArray m_readData;
+    QByteArray m_buffer;
 
 public slots:
     // void SetProtocol(const int &protocolselect);
@@ -28,8 +28,6 @@ public slots:
     void closeConnection();
     void clear();
     void assemblemessage(const QByteArray &buffer);
-
-
 };
 
-#endif // ARDUINO_H
+#endif  // ARDUINO_H

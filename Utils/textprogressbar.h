@@ -51,11 +51,11 @@
 #ifndef TEXTPROGRESSBAR_H
 #define TEXTPROGRESSBAR_H
 #include "dashboard.h"
+
 #include <QString>
 
-class TextProgressBar: public QObject
+class TextProgressBar : public QObject
 {
-
     Q_OBJECT
 
 public:

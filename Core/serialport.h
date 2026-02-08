@@ -7,8 +7,8 @@ class SerialPort : public QSerialPort
 {
     Q_OBJECT
 public:
-    SerialPort(QObject *parent = 0);
+    SerialPort(QObject *parent = nullptr);
     void setParity(const int &parity);
 };
 
-#endif // SERIALPORT_H
+#endif  // SERIALPORT_H

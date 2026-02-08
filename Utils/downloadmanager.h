@@ -51,12 +51,12 @@
 #ifndef DOWNLOADMANAGER_H
 #define DOWNLOADMANAGER_H
 
-#include <QtNetwork>
-#include <QtCore>
-
 #include "textprogressbar.h"
 
-class DownloadManager: public QObject
+#include <QtCore>
+#include <QtNetwork>
+
+class DownloadManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString downloadStatus READ downloadStatus WRITE setDownloadStatus NOTIFY downloadStatusChanged)
@@ -68,8 +68,7 @@ public:
     static QString saveFileName(const QUrl &url);
 
 
-
-    //Expose to QML
+    // Expose to QML
     void setDownloadStatus(const QString &downloadStatus);
     QString downloadStatus() const;
     QString m_downloadStatus;

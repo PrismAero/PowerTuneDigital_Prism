@@ -1,7 +1,7 @@
 /**
  * @file ElectricMotorData.h
  * @brief Electric motor/EV data model for PowerTune
- * 
+ *
  * This class encapsulates electric motor/EV-specific data including:
  * - IGBT phase temperatures
  * - Motor temperature
@@ -10,7 +10,7 @@
  * - Motor speed, angle
  * - RTD temps 1-5
  * - Digital switch inputs
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -38,7 +38,8 @@ class ElectricMotorData : public QObject
     Q_PROPERTY(qreal RtdTemp5 READ RtdTemp5 WRITE setRtdTemp5 NOTIFY RtdTemp5Changed)
 
     // * Motor
-    Q_PROPERTY(qreal EMotorTemperature READ EMotorTemperature WRITE setEMotorTemperature NOTIFY EMotorTemperatureChanged)
+    Q_PROPERTY(
+        qreal EMotorTemperature READ EMotorTemperature WRITE setEMotorTemperature NOTIFY EMotorTemperatureChanged)
     Q_PROPERTY(qreal EMotorAngle READ EMotorAngle WRITE setEMotorAngle NOTIFY EMotorAngleChanged)
     Q_PROPERTY(qreal EMotorSpeed READ EMotorSpeed WRITE setEMotorSpeed NOTIFY EMotorSpeedChanged)
     Q_PROPERTY(qreal TorqueShudder READ TorqueShudder WRITE setTorqueShudder NOTIFY TorqueShudderChanged)
@@ -52,14 +53,19 @@ class ElectricMotorData : public QObject
     Q_PROPERTY(qreal OutputVoltage READ OutputVoltage WRITE setOutputVoltage NOTIFY OutputVoltageChanged)
     Q_PROPERTY(qreal VABvdVoltage READ VABvdVoltage WRITE setVABvdVoltage NOTIFY VABvdVoltageChanged)
     Q_PROPERTY(qreal VBCvqVoltage READ VBCvqVoltage WRITE setVBCvqVoltage NOTIFY VBCvqVoltageChanged)
-    Q_PROPERTY(qreal ElectricalOutFreq READ ElectricalOutFreq WRITE setElectricalOutFreq NOTIFY ElectricalOutFreqChanged)
-    Q_PROPERTY(qreal DeltaResolverFiltered READ DeltaResolverFiltered WRITE setDeltaResolverFiltered NOTIFY DeltaResolverFilteredChanged)
+    Q_PROPERTY(
+        qreal ElectricalOutFreq READ ElectricalOutFreq WRITE setElectricalOutFreq NOTIFY ElectricalOutFreqChanged)
+    Q_PROPERTY(qreal DeltaResolverFiltered READ DeltaResolverFiltered WRITE setDeltaResolverFiltered NOTIFY
+                   DeltaResolverFilteredChanged)
 
     // * Digital Inputs (EV-specific)
-    Q_PROPERTY(qreal DigInput1FowardSw READ DigInput1FowardSw WRITE setDigInput1FowardSw NOTIFY DigInput1FowardSwChanged)
-    Q_PROPERTY(qreal DigInput2ReverseSw READ DigInput2ReverseSw WRITE setDigInput2ReverseSw NOTIFY DigInput2ReverseSwChanged)
+    Q_PROPERTY(
+        qreal DigInput1FowardSw READ DigInput1FowardSw WRITE setDigInput1FowardSw NOTIFY DigInput1FowardSwChanged)
+    Q_PROPERTY(
+        qreal DigInput2ReverseSw READ DigInput2ReverseSw WRITE setDigInput2ReverseSw NOTIFY DigInput2ReverseSwChanged)
     Q_PROPERTY(qreal DigInput3BrakeSw READ DigInput3BrakeSw WRITE setDigInput3BrakeSw NOTIFY DigInput3BrakeSwChanged)
-    Q_PROPERTY(qreal DigInput4RegenDisableSw READ DigInput4RegenDisableSw WRITE setDigInput4RegenDisableSw NOTIFY DigInput4RegenDisableSwChanged)
+    Q_PROPERTY(qreal DigInput4RegenDisableSw READ DigInput4RegenDisableSw WRITE setDigInput4RegenDisableSw NOTIFY
+                   DigInput4RegenDisableSwChanged)
     Q_PROPERTY(qreal DigInput5IgnSw READ DigInput5IgnSw WRITE setDigInput5IgnSw NOTIFY DigInput5IgnSwChanged)
     Q_PROPERTY(qreal DigInput6StartSw READ DigInput6StartSw WRITE setDigInput6StartSw NOTIFY DigInput6StartSwChanged)
     Q_PROPERTY(qreal DigInput7Bool READ DigInput7Bool WRITE setDigInput7Bool NOTIFY DigInput7BoolChanged)
@@ -240,4 +246,4 @@ private:
     qreal m_DigInput8Bool = 0;
 };
 
-#endif // ELECTRICMOTORDATA_H
+#endif  // ELECTRICMOTORDATA_H

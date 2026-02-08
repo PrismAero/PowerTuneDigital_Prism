@@ -1,12 +1,12 @@
 /**
  * @file FlagsData.h
  * @brief ECU status flags data model for PowerTune
- * 
+ *
  * This class encapsulates ECU flag/status data including:
  * - Flag1-25 (numeric flags)
  * - FlagString1-16 (text flags)
  * - SensorString1-8 (sensor labels)
- * 
+ *
  * Part of the DashBoard God Object refactoring (TODO-001)
  */
 
@@ -302,4 +302,4 @@ private:
     QString m_SensorString8;
 };
 
-#endif // FLAGSDATA_H
+#endif  // FLAGSDATA_H

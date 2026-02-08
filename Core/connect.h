@@ -20,13 +20,14 @@
   \author Bastian Gschrey & Markus Ippy
  */
 
-#include <QtSerialPort/QSerialPort>
-#include <QObject>
-#include <QModbusDataUnit>
-#include <QTimer>
-#include <QProcess>
 #include "../Utils/Calculations.h"
+
 #include <QFileSystemModel>
+#include <QModbusDataUnit>
+#include <QObject>
+#include <QProcess>
+#include <QTimer>
+#include <QtSerialPort/QSerialPort>
 
 
 class SerialPort;
@@ -50,16 +51,16 @@ class Connect : public QObject
     Q_PROPERTY(QStringList portsNames READ portsNames WRITE setPortsNames NOTIFY sig_portsNamesChanged)
 
 public:
-    ~Connect();
-    explicit Connect(QObject *parent = 0);
-    Q_INVOKABLE void saveDashtoFile(const QString &filename,const QString &dashstring);
+    ~Connect() override;
+    explicit Connect(QObject *parent = nullptr);
+    Q_INVOKABLE void saveDashtoFile(const QString &filename, const QString &dashstring);
     Q_INVOKABLE void setfilename1(const QString &file1);
     Q_INVOKABLE void setfilename2(const QString &file2);
     Q_INVOKABLE void setfilename3(const QString &file3);
     Q_INVOKABLE void checkifraspberrypi();
     Q_INVOKABLE void readavailabledashfiles();
     Q_INVOKABLE void readavailablebackrounds();
-    Q_INVOKABLE void setrpm(const int &dash1,const int &dash2,const int &dash3);
+    Q_INVOKABLE void setrpm(const int &dash1, const int &dash2, const int &dash3);
     Q_INVOKABLE void readMaindashsetup();
     Q_INVOKABLE void readdashsetup3();
     Q_INVOKABLE void readdashsetup2();
@@ -77,8 +78,19 @@ public:
     Q_INVOKABLE void LiveReqMsgOBD(const QString &obdpids);
     Q_INVOKABLE void daemonstartup(const int &daemon);
     Q_INVOKABLE void canbitratesetup(const int &cansetting);
-    Q_INVOKABLE void LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5, const int &val6, const int &val7, const int &val8, const int &val9, const int &val10, const int &val11, const int &val12, const int &val13, const int &val14, const int &val15, const int &val16, const int &val17, const int &val18, const int &val19, const int &val20, const int &val21, const int &val22, const int &val23, const int &val24, const int &val25, const int &val26, const int &val27, const int &val28, const int &val29, const int &val30, const int &val31, const int &val32, const int &val33, const int &val34, const int &val35, const int &val36, const int &val37, const int &val38, const int &val39, const int &val40, const int &val41, const int &val42, const int &val43, const int &val44, const int &val45);
-    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect,const int &canbase,const int &rpmcanbase);
+    Q_INVOKABLE void LiveReqMsg(const int &val1, const int &val2, const int &val3, const int &val4, const int &val5,
+                                const int &val6, const int &val7, const int &val8, const int &val9, const int &val10,
+                                const int &val11, const int &val12, const int &val13, const int &val14,
+                                const int &val15, const int &val16, const int &val17, const int &val18,
+                                const int &val19, const int &val20, const int &val21, const int &val22,
+                                const int &val23, const int &val24, const int &val25, const int &val26,
+                                const int &val27, const int &val28, const int &val29, const int &val30,
+                                const int &val31, const int &val32, const int &val33, const int &val34,
+                                const int &val35, const int &val36, const int &val37, const int &val38,
+                                const int &val39, const int &val40, const int &val41, const int &val42,
+                                const int &val43, const int &val44, const int &val45);
+    Q_INVOKABLE void openConnection(const QString &portName, const int &ecuSelect, const int &canbase,
+                                    const int &rpmcanbase);
     Q_INVOKABLE void closeConnection();
     Q_INVOKABLE void update();
     Q_INVOKABLE void changefolderpermission();
@@ -92,7 +104,6 @@ public:
 
 
 public:
-
     QStringList portsNames() const { return m_portsNames; }
 
 private:
@@ -117,8 +128,6 @@ private:
     Extender *m_extender;
 
 
-
-
 signals:
     void sig_portsNamesChanged(QStringList portsNames);
 
@@ -134,9 +143,7 @@ public slots:
         emit sig_portsNamesChanged(portsNames);
     }
     void processOutput();
-
 };
 
 
-
-#endif // CONNECT_H
+#endif  // CONNECT_H

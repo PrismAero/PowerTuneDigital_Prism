@@ -1,11 +1,11 @@
 #ifndef SENSORS_H
 #define SENSORS_H
 
-#include <QObject>
 #include <QAccelerometer>
-#include <QGyroscope>
-#include <QCompass>
 #include <QAmbientTemperatureSensor>
+#include <QCompass>
+#include <QGyroscope>
+#include <QObject>
 #include <QPressureSensor>
 
 class Sensors;
@@ -16,10 +16,8 @@ class Sensors : public QObject
     Q_OBJECT
 
 public:
-
-
-    explicit Sensors(QObject *parent = 0);
-    explicit Sensors(DashBoard *dashboard, QObject *parent = 0);
+    explicit Sensors(QObject *parent = nullptr);
+    explicit Sensors(DashBoard *dashboard, QObject *parent = nullptr);
     Q_INVOKABLE void Comp();
     Q_INVOKABLE void Accel();
     Q_INVOKABLE void Gyro();
@@ -48,10 +46,6 @@ private:
     QGyroscopeReading *gyro_reading;
     QAmbientTemperatureReading *temp_reading;
     QPressureReading *press_reading;
-
-
-
-
 };
 
-#endif // SENSORS_H
+#endif  // SENSORS_H
