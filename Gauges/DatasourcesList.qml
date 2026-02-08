@@ -1659,6 +1659,16 @@ ListModel {
         supportedECUs: "HaltechV2,Microtech,ECU Master,EMTRON,Syvecs S7"
     }
     ListElement {
+        sourcename:"FuelPress2"
+        defaultsymbol: "kPa"
+        titlename:"Fuel Pres."
+        decimalpoints : "0"
+        maxvalue : "400"
+        stepsize : "100"
+        divisor : "1"
+        supportedECUs: "HaltechV2,Microtech,ECU Master,EMTRON,Syvecs S7"
+    }
+    ListElement {
         sourcename:"Fueltemp"
         defaultsymbol: "°C"
         titlename:"Fuel T."

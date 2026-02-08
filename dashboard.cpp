@@ -268,6 +268,7 @@ DashBoard::DashBoard(QObject *parent)
     , m_LAMBDA(0)
     , m_LAMBDATarget(0)
     , m_FuelPress(0)
+    , m_FuelPress2(0)
     , m_GearOilPress(0)
 
     //GPS Strings
@@ -2490,6 +2491,16 @@ void DashBoard::setFuelPress(const qreal &FuelPress)
     if (m_pressureunits == "imperial")
     {m_FuelPress = FuelPress * 0.145038;}
     emit fuelPressChanged(FuelPress);
+}
+void DashBoard::setFuelPress2(const qreal &FuelPress2)
+{
+    if(m_FuelPress2 == FuelPress2)
+        return;
+    if (m_pressureunits == "metric")
+    { m_FuelPress2 = FuelPress2;}
+    if (m_pressureunits == "imperial")
+    {m_FuelPress2 = FuelPress2 * 0.145038;}
+    emit fuelPress2Changed(FuelPress2);
 }
 void DashBoard::setGearOilPress(const qreal &GearOilPress)
 {
@@ -5691,6 +5702,7 @@ qreal DashBoard::TRIM() const { return m_TRIM; }
 qreal DashBoard::LAMBDA() const { return m_LAMBDA; }
 qreal DashBoard::LAMBDATarget() const { return m_LAMBDATarget; }
 qreal DashBoard::FuelPress() const { return m_FuelPress; }
+qreal DashBoard::FuelPress2() const { return m_FuelPress2; }
 qreal DashBoard::GearOilPress() const { return m_GearOilPress; }
 
 // Qsensors

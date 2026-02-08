@@ -1139,7 +1139,9 @@ void udpreceiver::processPendingDatagrams()
         case 872:
             m_dashboard->setengineprotectionreason(list[1]);
             break;
-
+        case 873:
+            m_dashboard->setFuelPress2(Value);
+            break;
 
 //EX Board
         case 900:

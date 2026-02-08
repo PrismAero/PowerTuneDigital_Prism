@@ -203,6 +203,7 @@ class DashBoard : public QObject
     Q_PROPERTY(qreal LAMBDA READ LAMBDA WRITE setLAMBDA NOTIFY lAMBDAChanged)
     Q_PROPERTY(qreal LAMBDATarget READ LAMBDATarget WRITE setLAMBDATarget NOTIFY lAMBDATargetChanged)
     Q_PROPERTY(qreal FuelPress READ FuelPress WRITE setFuelPress NOTIFY fuelPressChanged)
+    Q_PROPERTY(qreal FuelPress2 READ FuelPress2 WRITE setFuelPress2 NOTIFY fuelPress2Changed)
     Q_PROPERTY(qreal GearOilPress READ GearOilPress WRITE setGearOilPress NOTIFY GearOilPressChanged)
 
     //GPS Strings
@@ -936,6 +937,7 @@ class DashBoard : public QObject
     void setLAMBDA(const qreal &LAMBDA);
     void setLAMBDATarget(const qreal &LAMBDATarget);
     void setFuelPress(const qreal &FuelPress);
+    void setFuelPress2(const qreal &FuelPress2);
     void setGearOilPress(const qreal &GearOilPress);
 
     //qsensors
@@ -1560,6 +1562,7 @@ class DashBoard : public QObject
     qreal LAMBDA() const;
     qreal LAMBDATarget() const;
     qreal FuelPress() const;
+    qreal FuelPress2() const;
     qreal GearOilPress() const;
 
     //qsensors
@@ -2183,6 +2186,7 @@ signals:
     void lAMBDAChanged(qreal LAMBDA);
     void lAMBDATargetChanged(qreal LAMBDATarget);
     void fuelPressChanged(qreal FuelPress);
+    void fuelPress2Changed(qreal FuelPress2);
     void GearOilPressChanged(qreal GearOilPress);
 
 
@@ -2787,6 +2791,7 @@ private:
     qreal m_LAMBDA;
     qreal m_LAMBDATarget;
     qreal m_FuelPress;
+    qreal m_FuelPress2;
     qreal m_GearOilPress;
 
 
