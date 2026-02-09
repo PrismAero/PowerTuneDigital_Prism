@@ -4,10 +4,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.0
 import QtQml.Models 2.3
 import Qt.labs.settings 1.0
-import "qrc:/Gauges/Qt6Compat"
+import PowerTune 1.0
 import "../Gauges"
 import "qrc:/Gauges/createsquaregaugeUserDash.js" as CreateSquareGaugeScript
-import "qrc:/Translator.js" as Translator
+import PowerTune 1.0
 
 
 

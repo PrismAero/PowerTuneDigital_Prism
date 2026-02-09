@@ -1,8 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Qt5Compat.GraphicalEffects
-import "qrc:/Gauges/Qt6Compat"
-import "qrc:/Translator.js" as Translator
+import PowerTune 1.0
+import PowerTune 1.0
 
 Rectangle{
     id: roundGauge

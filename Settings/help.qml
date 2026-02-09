@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
-import "qrc:/Translator.js" as Translator
+import PowerTune 1.0
 Rectangle {
     id: helpBackground
     anchors.fill: parent

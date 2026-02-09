@@ -4,7 +4,7 @@ import QtPositioning
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtCore
-import "qrc:/Gauges/Qt6Compat"
+import PowerTune 1.0
 import IMD 1.0
 
 

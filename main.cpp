@@ -22,6 +22,10 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("power-tune.org");
     app.setApplicationName("PowerTune");
     QQmlApplicationEngine engine;
+    
+    // * Add PowerTune QML module path for import PowerTune 1.0
+    engine.addImportPath("qrc:/");
+    
     qmlRegisterType<ioMapData>("IMD", 1, 0, "IMD");
     qmlRegisterType<DownloadManager>("DLM", 1, 0, "DLM");
     qmlRegisterType<Connect>("com.powertune", 1, 0, "ConnectObject");

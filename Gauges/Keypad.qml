@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
-import "qrc:/Gauges/Qt6Compat"
+import PowerTune 1.0
 
 Item {
     id: keypad

@@ -212,6 +212,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     # * Suppress Qt policy warning about qmldir files
     qt_policy(SET QTP0004 OLD)
     
+    # * Define singleton files separately for proper Qt6 singleton registration
+    set_source_files_properties(PowerTune/Translator.qml PROPERTIES
+        QT_QML_SINGLETON_TYPE TRUE
+    )
+    
     qt_add_qml_module(${PROJECT_NAME}
         URI PowerTune
         VERSION 1.0

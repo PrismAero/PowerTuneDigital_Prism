@@ -1,8 +1,8 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
-import "qrc:/Gauges/Qt6Compat"
-import "qrc:/Translator.js" as Translator
+import PowerTune 1.0
+import PowerTune 1.0
 import Qt.labs.settings 1.0
 Rectangle {
 

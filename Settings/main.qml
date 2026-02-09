@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtMultimedia 5.8
 import Qt.labs.settings 1.0
-import "qrc:/Translator.js" as Translator
+import PowerTune 1.0
 import "components"
 
 Rectangle {

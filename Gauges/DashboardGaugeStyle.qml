@@ -48,7 +48,7 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-import "qrc:/Gauges/Qt6Compat"
+import PowerTune 1.0
 
 CircularGaugeStyle {
 

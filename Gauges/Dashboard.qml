@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
-import "qrc:/Gauges/Qt6Compat"
+import PowerTune 1.0
 
 
 
